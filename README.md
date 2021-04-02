@@ -5,10 +5,10 @@ Simple jeu en javascript
 
 ####Mettre un lien
 
-Rendez-vous sur Simplonline !
+Rendez-vous sur mon super git !
 
 Il vous faut le mot sur lequel vous souhaitez faire votre lien entre crochets [ ], puis votre lien entre parenthèses ( ).
 
-Rendez-vous sur [Simplonline](http://www.simplonline.com) !
+Rendez-vous sur [mon super git](https://github.com/FeutreEnBois) !
 
 ###Nos Lien
