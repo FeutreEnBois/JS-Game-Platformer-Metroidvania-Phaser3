@@ -21,3 +21,6 @@ si le lien ne fonctinne pas vous pouvez copiez coller le lien suivant : https://
 - [full platformer game par FreeCodeCamp](https://www.youtube.com/watch?v=w-OKdSHRlfA&t=1s)
 - [le mario (sans Phaser)](https://www.youtube.com/watch?v=g-FpDQ8Eqw8&list=PLS8HfBXv9ZWWe8zXrViYbIM2Hhylx8DZx&index=1)
 - [tuto phaser](https://phaser.io/tutorials/making-your-first-phaser-3-game/part1)
+
+# Sprites ressources :
+- [RPG ,Dungeon Crawler sprites](https://0x72.itch.io/dungeontileset-ii)
