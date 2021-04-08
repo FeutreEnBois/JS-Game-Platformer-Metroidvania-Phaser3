@@ -35,7 +35,7 @@ var keyS;
 var keyD;
 
 function preload() {
-    this.load.audio('luna', '/assets/TheThing8bit.mp3');
+    this.load.audio('luna', 'assets/TheThing8bit.mp3');
     this.load.image("tiles", "assets/tilesets/oubliette_tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tilemaps/IntroOubliette.json");
     this.load.spritesheet('dude', 'assets/sprite/dude.png', {
@@ -159,13 +159,13 @@ function update(time, delta) {
         player.body.velocity.x = 350
             // Idle
     } else if (keyQ.isDown) {
-        player.body.setVelocityX(-160);
+        player.body.setVelocityX(-100);
 
         // player.anims.play('left', true);
     }
     // moove right
     else if (keyD.isDown) {
-        player.body.setVelocityX(160);
+        player.body.setVelocityX(100);
 
         // player.anims.play('right', true);
 
