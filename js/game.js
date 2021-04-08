@@ -143,7 +143,18 @@ function create() {
             player.body.setVelocityY(-200);
         }
     }, this);
+    
 
+    enemy = this.add.rectangle(300, 120, 10, 16, 0xff0000);
+    this.physics.add.group(enemy);
+    this.physics.add.collider(enemy, platforms);
+    this.physics.add.collider(enemy, player);
+    // this.physics.add.collider(enemy, player,hitEnemy,null, this);
+
+
+    // enem.setBounce(1);
+    // enem.setCollideWorldBounds(true);
+    // enem.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
 }
 
@@ -153,19 +164,19 @@ function update(time, delta) {
     // Apply the controls to the camera each update tick of the game
     controls.update(delta);
     // Player moovements
-    if (keyQ.isDown && cursors.shift.isDown) {
-        player.body.setVelocityX(-350)
-    } else if (keyD.isDown && cursors.shift.isDown) {
-        player.body.velocity.x = 350
+    if (keyQ.isDown && cursors.space.isDown) {
+        player.body.setVelocityX(-200)
+    } else if (keyD.isDown && cursors.space.isDown) {
+        player.body.velocity.x = 200
             // Idle
     } else if (keyQ.isDown) {
-        player.body.setVelocityX(-100);
+        player.body.setVelocityX(-80);
 
         // player.anims.play('left', true);
     }
     // moove right
     else if (keyD.isDown) {
-        player.body.setVelocityX(100);
+        player.body.setVelocityX(80);
 
         // player.anims.play('right', true);
 
@@ -189,4 +200,23 @@ function update(time, delta) {
     // {
     //     player.body.setVelocityY(-300);
     // }
+        // if player to left of enemy AND enemy moving to right (or not moving)
+    if (player.x < enemy.x && enemy.body.velocity.x >= 0) {
+        // move enemy to left
+        enemy.body.velocity.x = -50;
+    }
+    // if player to right of enemy AND enemy moving to left (or not moving)
+    else if (player.x > enemy.x && enemy.body.velocity.x <= 0) {
+        // move enemy to right
+        enemy.body.velocity.x = 50;
+    }
+
+    // function hitEnemy(player, enem) {
+    //     this.physics.pause();
+    //     // player.setTint(0xff0000);
+    //     // player.anims.play('death');
+
+    //     gameOver = true;
+    // }
+
 }
