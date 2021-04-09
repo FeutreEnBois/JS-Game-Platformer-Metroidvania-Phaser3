@@ -38,6 +38,11 @@ var keyD;
 var keyP;
 var keyO;
 var keyI;
+var nbrDash = 2;
+var dash = 2;
+var delayBTWDash = 60;
+var delay = 0;
+var cooldownDash = false;
 
 
 
@@ -171,6 +176,14 @@ function create() {
 
 
 function update(time, delta) {
+    
+    if (cooldownDash == true){
+        delay += 1
+        if (delay == delayBTWDash){
+            cooldownDash = false
+            dash = nbrDash
+        }
+    }
     // Apply the controls to the camera each update tick of the game
     controls.update(delta);
     // P for pause
@@ -188,12 +201,22 @@ function update(time, delta) {
     }
 
     // Player moovements
-    else if (keyQ.isDown && cursors.space.isDown) {
+    else if (keyQ.isDown && cursors.space.isDown && cooldownDash != true) {
+        dash -= 1;
+        if (dash <= 0){
+            delay = 0
+            cooldownDash = true;
+        }
+        player.body.setVelocityX(-500)
         // speedBoostG()
-        player.body.setVelocityX(-200)
-    } else if (keyD.isDown && cursors.space.isDown) {
+    } else if (keyD.isDown && cursors.space.isDown && cooldownDash != true) {
         // speedBoostD()
-        player.body.setVelocityX(200)
+        dash -= 1;
+        if (dash <= 0){
+            delay = 0
+            cooldownDash = true;
+        }
+        player.body.setVelocityX(500)
     }       // Idle
 
     else if (keyQ.isDown) {
