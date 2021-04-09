@@ -43,7 +43,8 @@ var dash = 4;
 var delayBTWDash = 60;
 var delay = 0;
 var cooldownDash = false;
-var volume = 0.4
+var volume = 0.4;
+var music
 
 
 
@@ -62,7 +63,7 @@ function create() {
     
     const map = this.make.tilemap({ key: "map" });
     //music
-    var music = this.sound.add('luna');
+    music = this.sound.add('luna');
     music.setVolume(volume);
     music.play();
 
@@ -201,6 +202,7 @@ function update(time, delta) {
     }
     // I for restart
     else if (keyI.isDown){
+        music.stop();
         this.scene.restart(); // restart current scene
 
     }
@@ -271,6 +273,7 @@ function update(time, delta) {
 function hitEnemy(player, enemy) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
+    music.stop();
     this.scene.restart();
     gameOver = true;
 }
