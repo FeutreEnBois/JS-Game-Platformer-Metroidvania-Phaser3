@@ -39,10 +39,11 @@ var keyP;
 var keyO;
 var keyI;
 var nbrDash = 2;
-var dash = 2;
+var dash = 4;
 var delayBTWDash = 60;
 var delay = 0;
 var cooldownDash = false;
+var volume = 0.4
 
 
 
@@ -58,10 +59,11 @@ function preload() {
 }
 
 function create() {
+    
     const map = this.make.tilemap({ key: "map" });
     //music
     var music = this.sound.add('luna');
-    music.setVolume(0.4);
+    music.setVolume(volume);
     music.play();
 
     // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
@@ -164,13 +166,16 @@ function create() {
     enemy = this.add.rectangle(300, 120, 10, 16, 0xff0000);
     this.physics.add.group(enemy);
     this.physics.add.collider(enemy, platforms);
-    this.physics.add.collider(enemy, player);
-    // this.physics.add.collider(enemy, player,hitEnemy,null, this);
-
-    // enem.setBounce(1);
-    // enem.setCollideWorldBounds(true);
-    // enem.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
+    this.physics.add.collider(enemy, player,hitEnemy,null, this);
+//  
+    
+    // REGLER LE VOLUME
+    // if  (cursors.down.isDown) {
+    //     music.stop();
+    //     volume = volume - 0.1 
+    //     music.setVolume(volume)
+    //     music.play();
+    // }
 }
 
 
@@ -203,7 +208,7 @@ function update(time, delta) {
     // Player moovements
     else if (keyQ.isDown && cursors.space.isDown && cooldownDash != true) {
         dash -= 1;
-        if (dash <= 0){
+        if (dash == 0){
             delay = 0
             cooldownDash = true;
         }
@@ -212,7 +217,7 @@ function update(time, delta) {
     } else if (keyD.isDown && cursors.space.isDown && cooldownDash != true) {
         // speedBoostD()
         dash -= 1;
-        if (dash <= 0){
+        if (dash == 0){
             delay = 0
             cooldownDash = true;
         }
@@ -261,12 +266,13 @@ function update(time, delta) {
         enemy.body.velocity.x = 50;
     }
 
-    // function hitEnemy(player, enem) {
-    //     this.physics.pause();
-    //     // player.setTint(0xff0000);
-    //     // player.anims.play('death');
-
-    //     gameOver = true;
-    // }
-
 }
+
+function hitEnemy(player, enemy) {
+    // player.body.setTint(0xff0000);
+    // player.anims.play('death');
+    this.scene.restart();
+    gameOver = true;
+}
+
+
