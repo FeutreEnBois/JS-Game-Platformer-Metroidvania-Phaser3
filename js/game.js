@@ -1,5 +1,65 @@
 // import {speedBoostD, speedBoostG} from './doubleJump+bigBoost.js'
 
+                    // ITS VERY VERY FUN
+// class Bullet extends Phaser.Physics.Arcade.Sprite
+// {
+//     constructor (scene, x, y)
+//     {
+//         super(scene, x, y, 'bullet');
+//     }
+
+//     fire (x, y)
+//     {
+//         this.body.reset(x, y);
+
+//         this.setActive(true);
+//         this.setVisible(true);
+//         this.body.allowGravity = false;
+
+//         this.setVelocityX(-300);
+//         this.setVelocityX(300);
+
+//     }
+
+//     preUpdate (time, delta)
+//     {
+//         super.preUpdate(time, delta);
+
+//         if (this.y <= -32)
+//         {
+//             this.setActive(false);
+//             this.setVisible(false);
+//         }
+//     }
+// }
+
+// class Bullets extends Phaser.Physics.Arcade.Group
+// {
+//     constructor (scene)
+//     {
+//         super(scene.physics.world, scene);
+
+//         this.createMultiple({
+//             frameQuantity: 100,
+//             key: 'bullet',
+//             active: false,
+//             visible: false,
+//             classType: Bullet
+//         });
+//     }
+
+//     fireBullet (x, y)
+//     {
+//         let bulletss = this.getFirstDead(false);
+
+//         if (bulletss)
+//         {
+//             bulletss.fire(x, y);
+//         }
+//     }
+// }
+
+
 const config = {
     type: Phaser.AUTO,
 
@@ -46,7 +106,11 @@ var delayBTWDash = 60;
 var delay = 0;
 var cooldownDash = false;
 var volume = 0.4;
-var music
+var music;
+var enemy1;
+var enemy2;
+var enemy3;
+var bullets;
 
 function preload() {
     this.load.audio('luna', 'assets/TheThing8bit.mp3');
@@ -122,6 +186,7 @@ function create() {
     // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
     player.body.setCollideWorldBounds(true);
+
     // player.body.setGravityY(900)
 
     // this.anims.create({
@@ -164,22 +229,46 @@ function create() {
         }
     }, this);
 
-
-    enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
+    enemy1 = this.add.rectangle(450,140,10,16, 0xff0000);
     this.physics.add.group(enemy1);
     this.physics.add.collider(enemy1, platforms);
     this.physics.add.collider(enemy1, player,hitEnemy,null, this);
 
-    enemy2 = this.add.rectangle(700, 75, 16, 10, 0xff0000);
+    enemy2 = this.add.rectangle(450, 75, 16, 10, 0xff0000);
     this.physics.add.group(enemy2);
     this.physics.add.collider(enemy2, platforms);
     this.physics.add.collider(enemy2, player,hitEnemy,null, this);
     enemy2.body.allowGravity = false;
 
-    enemy3 = this.add.rectangle(450, 120, 18, 16, 0xff0000);
-    this.physics.add.group(enemy3);
-    this.physics.add.collider(enemy3, platforms);
-    this.physics.add.collider(enemy3, player,hitEnemy,null, this);
+
+    enemy1.body.setCollideWorldBounds(true);
+    enemy2.body.setCollideWorldBounds(true);
+
+    bullets2 = this.add.sprite(450,75,'bullet');
+    this.physics.add.group(bullets2);
+    this.physics.add.collider(bullets2, platforms);
+    this.physics.add.collider(bullets2, player,hitEnemy,null, this);
+
+    bullets = this.physics.add.group();
+    this.physics.add.collider(player, bullets, hitBullet, null, this);
+
+                                //ITS VERY VERY VERY FUN
+    // this.bulletsss = new Bullets(this);
+
+    // this.ship = this.add.rectangle(0, 0, 10, 10,0x5c5a5a);
+    // this.input.on('pointermove', (pointer) => {
+
+    //     this.ship.x = pointer.x;
+    //     this.ship.y = pointer.y;
+
+    // });
+
+    // this.input.on('pointerdown', (pointer) => {
+
+    //     this.bulletsss.fireBullet(this.ship.x, this.ship.y);
+
+    // });
+
 
     // REGLER LE VOLUME
     // if  (cursors.down.isDown) {
@@ -210,10 +299,12 @@ function update(time, delta) {
     // P for pause
     if (keyP.isDown) {
         this.physics.pause();
+        music.pause();
     } 
     // O for resume
     else if (keyO.isDown){
         this.physics.resume();
+        music.resume();
     }
     // I for restart
     else if (keyI.isDown){
@@ -273,35 +364,43 @@ function update(time, delta) {
     //     player.body.setVelocityY(-300);
     // }
     // if player to left of enemy AND enemy moving to right (or not moving)
-    if (player.x <= enemy1.x && player.y == enemy1.y) {
+    if (player.body.x <= enemy1.body.x && player.body.y == enemy1.body.y) {
         // move enemy to left
-        enemy1.body.velocity.x = -30;
+        enemy1.body.velocity.x = -30;  
     }
     // if player to right of enemy AND enemy moving to left (or not moving)
-    else if (player.x >= enemy1.x && player.y == enemy1.y) {
+    else if (player.body.x > enemy1.body.x && player.body.y == enemy1.body.y) {
         // move enemy to right
         enemy1.body.velocity.x = 30;
     }
-
-    if (player.x <= enemy2.x) {
+    
+    if (player.body.x < enemy2.body.x) {
         // move enemy to left
         enemy2.body.velocity.x = -50;
+        shoot()
     }
     // if player to right of enemy AND enemy moving to left (or not moving)
-    else if (player.x >= enemy2.x) {
+    else if (player.body.x > enemy2.body.x) {
         // move enemy to right
         enemy2.body.velocity.x = 50;
+        shoot()
     }
 
-    if (player.x <= (enemy3.x+10) && player.y == enemy3.y) {
+    else if (player.body.x < bullets2.body.x) {
         // move enemy to left
-        enemy3.body.velocity.x = 20;
+        bullets2.body.velocity.x = -50;
+
     }
-    // if player to right of enemy AND enemy moving to left (or not moving)
-    else if (player.x == (enemy3.x+10) && player.y == enemy3.y) {
-        // move enemy to right
-        enemy3.body.velocity.x = -20;
+    else if (player.body.x > bullets2.body.x) {
+        // move enemy to left
+        bullets2.body.velocity.x = 50;
+
     }
+  
+
+
+
+
 
 
 
@@ -315,7 +414,27 @@ function hitEnemy(player, enemy1 , enemy2) {
     gameOver = true;
 }
 
+function hitBullet(player, bullets) {
+    // player.body.setTint(0xff0000);
+    // player.anims.play('death');
+    music.stop();
+    this.scene.restart();
+    gameOver = true;
+}
 
+function shoot() {
+    let i = 1
+    let l = getRandomInt(100)
+    if(i == l) {
+        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+        var bullet = bullets.create(enemy2.body.x + 5, enemy2.body.y +5, 'bullet');
+        bullet.setVelocity(0);
+    }
+    
+    
+}
 
-
-
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+  
