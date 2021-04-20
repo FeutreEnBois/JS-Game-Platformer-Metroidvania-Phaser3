@@ -234,7 +234,7 @@ function create() {
     this.physics.add.collider(enemy1, platforms);
     this.physics.add.collider(enemy1, player,hitEnemy,null, this);
 
-    enemy2 = this.add.rectangle(450, 75, 16, 10, 0xff0000);
+    enemy2 = this.add.rectangle(450, 20, 16, 10, 0xff0000);
     this.physics.add.group(enemy2);
     this.physics.add.collider(enemy2, platforms);
     this.physics.add.collider(enemy2, player,hitEnemy,null, this);
@@ -244,11 +244,7 @@ function create() {
     enemy1.body.setCollideWorldBounds(true);
     enemy2.body.setCollideWorldBounds(true);
 
-    bullets2 = this.add.sprite(450,75,'bullet');
-    this.physics.add.group(bullets2);
-    this.physics.add.collider(bullets2, platforms);
-    this.physics.add.collider(bullets2, player,hitEnemy,null, this);
-
+    
     bullets = this.physics.add.group();
     this.physics.add.collider(player, bullets, hitBullet, null, this);
 
@@ -366,12 +362,14 @@ function update(time, delta) {
     // if player to left of enemy AND enemy moving to right (or not moving)
     if (player.body.x <= enemy1.body.x && player.body.y == enemy1.body.y) {
         // move enemy to left
-        enemy1.body.velocity.x = -30;  
+        enemy1.body.velocity.x = -30; 
+        shoot2G() 
     }
     // if player to right of enemy AND enemy moving to left (or not moving)
     else if (player.body.x > enemy1.body.x && player.body.y == enemy1.body.y) {
         // move enemy to right
         enemy1.body.velocity.x = 30;
+        shoot2D()
     }
     
     if (player.body.x < enemy2.body.x) {
@@ -385,22 +383,6 @@ function update(time, delta) {
         enemy2.body.velocity.x = 50;
         shoot()
     }
-
-    else if (player.body.x < bullets2.body.x) {
-        // move enemy to left
-        bullets2.body.velocity.x = -50;
-
-    }
-    else if (player.body.x > bullets2.body.x) {
-        // move enemy to left
-        bullets2.body.velocity.x = 50;
-
-    }
-  
-
-
-
-
 
 
 
@@ -429,12 +411,41 @@ function shoot() {
         console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
         var bullet = bullets.create(enemy2.body.x + 5, enemy2.body.y +5, 'bullet');
         bullet.setVelocity(0);
+
+   
+
     }
-    
-    
 }
+
+function shoot2G() {
+    let i = 1
+    let l = getRandomInt(80)
+    if(i == l) {
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+        var bullet = bullets.create(enemy1.body.x + 5, enemy1.body.y +5, 'bullet');
+        bullet.setVelocityX(-200);
+        bullet.body.allowGravity = false;
+    }
+
+}
+
+function shoot2D() {
+    let i = 1
+    let l = getRandomInt(80)
+    if(i == l) {
+        console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+        var bullet = bullets.create(enemy1.body.x + 5, enemy1.body.y +5, 'bullet');
+        bullet.setVelocityX(200);
+        bullet.body.allowGravity = false;
+    }
+
+}
+
+
+    
+
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-  }
+}
   
