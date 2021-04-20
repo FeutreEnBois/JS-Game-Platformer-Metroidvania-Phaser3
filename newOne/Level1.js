@@ -10,6 +10,7 @@
 //     },
 // }
 
+
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
@@ -44,6 +45,7 @@ var controls;
 var enemy1;
 var enemy2;
 var enemy3;
+var Doors
 
 class Level1 extends Phaser.Scene {
     constructor() {
@@ -54,7 +56,7 @@ class Level1 extends Phaser.Scene {
 
     create() {
 
-        const map = this.make.tilemap({ key: "map" });
+        const map = this.make.tilemap({ key: "intro" });
         const tileset = map.addTilesetImage("oubliette", "tileset");
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
@@ -73,7 +75,14 @@ class Level1 extends Phaser.Scene {
         //     .setScrollFactor(0);
 
         cursors = this.input.keyboard.createCursorKeys();
+
+        Doors = this.add.group(); 
+        
+
+	    map.createFromObjects('Objects', "finishPoint", {}).forEach((object) => 
+	    	{ Doors.add(this.add.rectangle(object.x, object.y+16, 32, 32, 0x5c5a5a, 128)); object.destroy(); });
         // player = this.add.rectangle(32, 32, 10, 16, 0x5c5a5a);
+        this.physics.add.existing(Doors)
         player = new Player(this, 32, 32);
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
@@ -113,6 +122,7 @@ class Level1 extends Phaser.Scene {
         this.physics.add.collider(enemy3, platforms);
         this.physics.add.collider(enemy3, player, hitEnemy, null, this);
 
+        this.physics.add.collider(Doors, player, hitEnemy, null, this);
     }
 
     update() {

@@ -1,4 +1,4 @@
-class Scene_Menu extends Phaser.Scene_Menu
+class MainMenu extends Phaser.Scene
 {
     constructor()
     {

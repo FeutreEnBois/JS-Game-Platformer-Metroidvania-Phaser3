@@ -43,7 +43,7 @@ class Preloader extends Phaser.Scene {
         // Load all assets
 
         this.load.image("tileset", "assets/oubliette_tileset.png");
-        this.load.tilemapTiledJSON("map", "assets/IntroOubliette.json");
+        this.load.tilemapTiledJSON("intro", "assets/IntroOubliette.json");
     };
 
     create() {
