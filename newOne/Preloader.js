@@ -33,7 +33,7 @@ class Preloader extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('hero', 'assets/adventurer.png', { frameWidth: 50, frameHeight: 37 });
+        this.load.spritesheet('hero', 'assets/hero/adventurer/adventurer.png', { frameWidth: 50, frameHeight: 37 });
         this.load.spritesheet('goblin', 'assets/Monsters_Creatures_Fantasy/Goblin/Run.png', { frameWidth: 150, frameHeight: 150 });
         // this.preloaderBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
 
@@ -42,9 +42,14 @@ class Preloader extends Phaser.Scene {
         // this.preload.setPreloadSprite(this.preloadBar);
 
         // Load all assets
+        this.load.image("bullet", "assets/Monsters_Creatures_Fantasy/effect/bullet.png");
+        this.load.image("tileset", "assets/lvl/oubliette_tileset.png");
+        this.load.tilemapTiledJSON("lvl", "assets/lvl/lvl2/lvl2.json");
+        this.load.tilemapTiledJSON("intro", "assets/lvl/intro/IntroOubliette.json");
 
-        this.load.image("tileset", "assets/oubliette_tileset.png");
-        this.load.tilemapTiledJSON("map", "assets/IntroOubliette.json");
+        // AUDIO
+
+        this.load.audio('luna', 'assets/audio/theme/TheThing8bit.mp3');
     };
 
     create() {
