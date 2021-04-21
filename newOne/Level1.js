@@ -10,7 +10,6 @@
 //     },
 // }
 
-
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
@@ -45,7 +44,7 @@ var controls;
 var enemy1;
 var enemy2;
 var enemy3;
-var Doors
+var goblin;
 
 class Level1 extends Phaser.Scene {
     constructor() {
@@ -56,7 +55,7 @@ class Level1 extends Phaser.Scene {
 
     create() {
 
-        const map = this.make.tilemap({ key: "intro" });
+        const map = this.make.tilemap({ key: "map" });
         const tileset = map.addTilesetImage("oubliette", "tileset");
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
@@ -75,22 +74,20 @@ class Level1 extends Phaser.Scene {
         //     .setScrollFactor(0);
 
         cursors = this.input.keyboard.createCursorKeys();
-
-        Doors = this.add.group(); 
-        
-
-	    map.createFromObjects('Objects', "finishPoint", {}).forEach((object) => 
-	    	{ Doors.add(this.add.rectangle(object.x, object.y+16, 32, 32, 0x5c5a5a, 128)); object.destroy(); });
         // player = this.add.rectangle(32, 32, 10, 16, 0x5c5a5a);
-        this.physics.add.existing(Doors)
         player = new Player(this, 32, 32);
+        goblin = new Goblin(this,250,120);
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
         this.physics.add.collider(player, platforms);
+        this.physics.add.collider(goblin, platforms);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
         player.body.setCollideWorldBounds(true);
+        goblin.body.setCollideWorldBounds(true);
+        goblin.setScale(0.5)
+
 
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -122,7 +119,6 @@ class Level1 extends Phaser.Scene {
         this.physics.add.collider(enemy3, platforms);
         this.physics.add.collider(enemy3, player, hitEnemy, null, this);
 
-        this.physics.add.collider(Doors, player, hitEnemy, null, this);
     }
 
     update() {
@@ -202,14 +198,14 @@ class Level1 extends Phaser.Scene {
         //     player.body.setVelocityY(-300);
         // }
         // if player to left of enemy AND enemy moving to right (or not moving)
-        if (player.x <= enemy1.x && player.y == enemy1.y) {
+        if (player.x <= goblin.x) {
             // move enemy to left
-            enemy1.body.velocity.x = -30;
+            goblin.body.velocity.x = -30;
         }
         // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy1.x && player.y == enemy1.y) {
+        else if (player.x >= goblin.x) {
             // move enemy to right
-            enemy1.body.velocity.x = 30;
+            goblin.body.velocity.x = 30;
         }
     
         if (player.x <= enemy2.x) {

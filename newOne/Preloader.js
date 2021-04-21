@@ -34,6 +34,7 @@ class Preloader extends Phaser.Scene {
 
     preload() {
         this.load.spritesheet('hero', 'assets/adventurer.png', { frameWidth: 50, frameHeight: 37 });
+        this.load.spritesheet('goblin', 'assets/Monsters_Creatures_Fantasy/Goblin/Run.png', { frameWidth: 150, frameHeight: 150 });
         // this.preloaderBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
 
         // this.preloaderBar.anchor.setTo(0.5,0.5);
@@ -43,7 +44,7 @@ class Preloader extends Phaser.Scene {
         // Load all assets
 
         this.load.image("tileset", "assets/oubliette_tileset.png");
-        this.load.tilemapTiledJSON("intro", "assets/IntroOubliette.json");
+        this.load.tilemapTiledJSON("map", "assets/IntroOubliette.json");
     };
 
     create() {
@@ -64,6 +65,20 @@ class Preloader extends Phaser.Scene {
         this.anims.create({ key: 'hero_slide', frames: this.anims.generateFrameNumbers('hero', { start: 24, end: 28 }), duration: 800, });
         this.anims.create({ key: 'hero_hurt', frames: this.anims.generateFrameNumbers('hero', { start: 59, end: 61 }), frameRate: 5, });
         this.anims.create({ key: 'hero_defeat', frames: this.anims.generateFrameNumbers('hero', { start: 62, end: 68 }), frameRate: 8, });
+        
+        
+        this.anims.create({ key: 'goblin_walk', frames: this.anims.generateFrameNumbers('goblin', {start:0, end: 7}), repeat: -1, frameRate: 10});
+        // this.anims.create({ key: 'goblin_hurt', frames: this.anims.generateFrameNumbers('goblin', {start:0, end: 3}), repeat: -1, frameRate: 10});
+        // this.anims.create({ key: 'goblin_death', frames: this.anims.generateFrameNumbers('goblin', {start:0, end: 3}), repeat: -1, frameRate: 10});
+        
+        this.anims.create({ key: 'bat_fly', frames: this.anims.generateFrameNumbers('bat', {start:0, end: 7}), repeat: -1, frameRate: 10});
+        this.anims.create({ key: 'bat_hurt', frames: this.anims.generateFrameNumbers('bat', {start:0, end: 3}), repeat: -1, frameRate: 10});
+        this.anims.create({ key: 'bat_death', frames: this.anims.generateFrameNumbers('bat', {start:0, end: 3}), repeat: -1, frameRate: 10});
+
+        this.anims.create({ key: 'mushroom_walk', frames: this.anims.generateFrameNumbers('mushroom', {start:0, end: 7}), repeat: -1, frameRate: 10});
+        this.anims.create({ key: 'mushroom_hurt', frames: this.anims.generateFrameNumbers('mushroom', {start:0, end: 3}), repeat: -1, frameRate: 10});
+        this.anims.create({ key: 'mushroom_death', frames: this.anims.generateFrameNumbers('mushroom', {start:0, end: 3}), repeat: -1, frameRate: 10});
+
 
 
         this.scene.start('Level1');
