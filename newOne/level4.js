@@ -112,21 +112,8 @@ class Level4 extends Phaser.Scene {
         }, this);
 
 
-        enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
-        this.physics.add.group(enemy1);
-        this.physics.add.collider(enemy1, platforms);
-        this.physics.add.collider(enemy1, player, hitEnemy, null, this);
 
-        enemy2 = this.add.rectangle(700, 75, 16, 10, 0xff0000);
-        this.physics.add.group(enemy2);
-        this.physics.add.collider(enemy2, platforms);
-        this.physics.add.collider(enemy2, player, hitEnemy, null, this);
-        enemy2.body.allowGravity = false;
 
-        enemy3 = this.add.rectangle(450, 120, 18, 16, 0xff0000);
-        this.physics.add.group(enemy3);
-        this.physics.add.collider(enemy3, platforms);
-        this.physics.add.collider(enemy3, player, hitEnemy, null, this);
 
 
         this.physics.add.collider(end, platforms);
@@ -210,35 +197,5 @@ class Level4 extends Phaser.Scene {
         //     player.body.setVelocityY(-300);
         // }
         // if player to left of enemy AND enemy moving to right (or not moving)
-        if (player.x <= enemy1.x && player.y == enemy1.y) {
-            // move enemy to left
-            enemy1.body.velocity.x = -30;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy1.x && player.y == enemy1.y) {
-            // move enemy to right
-            enemy1.body.velocity.x = 30;
-        }
-    
-        if (player.x <= enemy2.x) {
-            // move enemy to left
-            // enemy2.body.velocity.x = -50;
-            enemy2.body.velocity.x = -50;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy2.x) {
-            // move enemy to right
-            enemy2.body.velocity.x = 50;
-        }
-    
-        if (player.x <= (enemy3.x+10) && player.y == enemy3.y) {
-            // move enemy to left
-            enemy3.body.velocity.x = 20;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x == (enemy3.x+10) && player.y == enemy3.y) {
-            // move enemy to right
-            enemy3.body.velocity.x = -20;
-        }
     }
 }

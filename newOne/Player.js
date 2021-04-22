@@ -24,7 +24,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.X = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.C = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         this.Cursors = scene.input.keyboard.createCursorKeys();
-        this.setCollideWorldBounds(true);
+        this.setCollideWorldBounds(false);
         this.speed_walk = 85;
         this.speed_slide = 185
         this.current_slide_speed = 0;

@@ -327,26 +327,26 @@ class Level1 extends Phaser.Scene {
         if (player.body.x < enemy2.body.x) {
             // move enemy to left
             enemy2.body.velocity.x = -50;
-            shoot()
+            // shoot()
         }
         // if player to right of enemy AND enemy moving to left (or not moving)
         else if (player.body.x > enemy2.body.x) {
             // move enemy to right
             enemy2.body.velocity.x = 50;
-            shoot()
+            // shoot()
         }
 
         if (dist2 < 150) {
             if (player.x < enemy3.x) {
                 // move enemy to left
                 enemy3.body.velocity.x = 30;
-                shoot2G()
+                // shoot2G()
             }
             // if player to right of enemy AND enemy moving to left (or not moving)
             else if (player.x > enemy3.x) {
                 // move enemy to right
                 enemy3.body.velocity.x = -30;
-                shoot2D()
+                // shoot2D()
             }
         } else {
             enemy3.body.velocity.x = 0;

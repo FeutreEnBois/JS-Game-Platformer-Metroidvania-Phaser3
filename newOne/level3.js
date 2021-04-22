@@ -97,8 +97,6 @@ class Level3 extends Phaser.Scene {
         this.physics.add.collider(player, platforms);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
-        player.body.setCollideWorldBounds(true);
-
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -111,14 +109,15 @@ class Level3 extends Phaser.Scene {
                 player.body.setVelocityY(-200);
             }
         }, this);
-
+        
+        
 
         enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
         this.physics.add.group(enemy1);
         this.physics.add.collider(enemy1, platforms);
         this.physics.add.collider(enemy1, player, hitEnemy, null, this);
 
-        enemy2 = this.add.rectangle(700, 75, 16, 10, 0xff0000);
+        enemy2 = this.add.rectangle(700, 40, 16, 10, 0xff0000);
         this.physics.add.group(enemy2);
         this.physics.add.collider(enemy2, platforms);
         this.physics.add.collider(enemy2, player, hitEnemy, null, this);
@@ -132,6 +131,10 @@ class Level3 extends Phaser.Scene {
 
         this.physics.add.collider(end, platforms);
         this.physics.add.collider(end, player, () => this.scene.start("Level4"));
+
+        this.cameras.main.setBounds(0, 0, worldLayer.displayWidth, worldLayer.displayHeight);
+        this.cameras.main.startFollow(player);
+        
     }
 
     update() {
