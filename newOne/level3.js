@@ -1,16 +1,3 @@
-// Game.Level1 = function(game){};
-
-// Game.Level1.prototype = {
-//     create:function(){
-//         this.stage.backgroundColor = '#3A5963'
-//     },
-
-//     update:function(){
-
-//     },
-// }
-
-
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
@@ -49,23 +36,23 @@ var Doors
 var endX;
 var endY;
 
-class Level2 extends Phaser.Scene {
+class Level3 extends Phaser.Scene {
     constructor() {
-        super({ key: "Level2" });
+        super({ key: "Level3" });
 
 
     }
 
     preload(){
         this.load.image("tileset", "assets/oubliette_tileset.png");
-        this.load.tilemapTiledJSON("lvl", "assets/lvl2.json");
+        this.load.tilemapTiledJSON("lvl1", "assets/lvl/lvl3/lvl1.json");
     }
 
     create() {
 
-        const map = this.make.tilemap({ key: "lvl" });
+        const map = this.make.tilemap({ key: "lvl3" });
 
-        let tileset = map.addTilesetImage("oubliette_tileset", "tileset");
+        let tileset = map.addTilesetImage("oubliette", "tileset");
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
         aboveLayer = map.createStaticLayer("sol", tileset, 0, 0)
@@ -144,7 +131,7 @@ class Level2 extends Phaser.Scene {
 
 
         this.physics.add.collider(end, platforms);
-        this.physics.add.collider(end, player, () => this.scene.start("Level3"));
+        this.physics.add.collider(end, player, () => this.scene.start("Level4"));
     }
 
     update() {
@@ -174,40 +161,6 @@ class Level2 extends Phaser.Scene {
     
         // Player moovements
         player.update()
-        // else if (keyQ.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(-1000)
-        //     // speedBoostG()
-        // } else if (keyD.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     // speedBoostD()
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(1000)
-        // }       // Idle
-    
-        // else if (keyQ.isDown) {
-        //     player.body.setVelocityX(-80);
-    
-        //     // player.anims.play('left', true);
-        // }
-        // // moove right
-        // else if (keyD.isDown) {
-        //     player.body.setVelocityX(80);
-    
-        //     // player.anims.play('right', true);
-    
-        // } else {
-        //     player.body.setVelocityX(0);
-    
-        //     // player.anims.play('turn');
-        // }
     
         if (keyZ.isDown) {
             console.log('Z key pressed')
@@ -219,10 +172,6 @@ class Level2 extends Phaser.Scene {
             console.log('Q key pressed')
         }
         // // Jump
-        // if (cursors.up.isDown && player.body.touching.down) // && player.body.touching.down
-        // {
-        //     player.body.setVelocityY(-300);
-        // }
         // if player to left of enemy AND enemy moving to right (or not moving)
         if (player.x <= enemy1.x && player.y == enemy1.y) {
             // move enemy to left

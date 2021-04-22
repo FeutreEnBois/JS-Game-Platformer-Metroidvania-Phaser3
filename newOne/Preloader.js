@@ -1,26 +1,3 @@
-// Game.Preloader = function(game){
-//     this.preloaderBar = null;
-// };
-
-// Game.Preloader.prototype = {
-//     preload:function(){
-//         this.preloaderBar = this.add.sprite(this.world.centerX,
-//             this.world.centerY, 'preloaderBar');
-
-//         this.preloaderBar.anchor.setTo(0.5,0.5);
-
-//         this.time.advancedTiming = true;
-
-//         this.preload.setPreloadSprite(this.preloadBar);
-
-//         // Load all assets
-//     },
-
-//     create:function(){
-//         this.state.start('Level1');
-//     }
-// }
-
 Phaser.GameObjects.Sprite.prototype.change_state = function(state, flag = 0)
 {
     this.state = state;
@@ -47,7 +24,9 @@ class Preloader extends Phaser.Scene {
         this.load.image("bullet", "assets/Monsters_Creatures_Fantasy/effect/bullet.png");
         this.load.image("tileset", "assets/lvl/oubliette_tileset.png");
         this.load.tilemapTiledJSON("lvl", "assets/lvl/lvl2/lvl2.json");
+        this.load.tilemapTiledJSON("lvl3", "assets/lvl/lvl3/lvl1.json");
         this.load.tilemapTiledJSON("intro", "assets/lvl/intro/IntroOubliette.json");
+        this.load.tilemapTiledJSON("lvl4", "assets/lvl/lvl4/arene-boss.json");
 
         // AUDIO
 

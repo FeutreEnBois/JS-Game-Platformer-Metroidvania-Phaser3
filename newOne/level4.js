@@ -1,16 +1,3 @@
-// Game.Level1 = function(game){};
-
-// Game.Level1.prototype = {
-//     create:function(){
-//         this.stage.backgroundColor = '#3A5963'
-//     },
-
-//     update:function(){
-
-//     },
-// }
-
-
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
@@ -49,23 +36,23 @@ var Doors
 var endX;
 var endY;
 
-class Level2 extends Phaser.Scene {
+class Level4 extends Phaser.Scene {
     constructor() {
-        super({ key: "Level2" });
+        super({ key: "Level4" });
 
 
     }
 
     preload(){
         this.load.image("tileset", "assets/oubliette_tileset.png");
-        this.load.tilemapTiledJSON("lvl", "assets/lvl2.json");
+        this.load.tilemapTiledJSON("lvl4", "assets/lvl/lvl4/arene-boss.json");
     }
 
     create() {
 
-        const map = this.make.tilemap({ key: "lvl" });
+        const map = this.make.tilemap({ key: "lvl4" });
 
-        let tileset = map.addTilesetImage("oubliette_tileset", "tileset");
+        let tileset = map.addTilesetImage("oubliette", "tileset");
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
         aboveLayer = map.createStaticLayer("sol", tileset, 0, 0)
@@ -96,14 +83,13 @@ class Level2 extends Phaser.Scene {
             //     }
             // }
         })
-
         var end = this.add.rectangle(endX+8, endY, 16, 16, 0x5c5a5a, 128)
         this.physics.add.group(end);
 	    // map.createFromObjects('Objects', "finishPoint", {}).forEach((object) => 
 	    // 	{ Doors.add(this.add.rectangle(object.x, object.y+16, 32, 32, 0x5c5a5a, 128)); object.destroy(); });
         // player = this.add.rectangle(32, 32, 10, 16, 0x5c5a5a);
         // this.physics.add.existing(Doors)
-        player = new Player(this, 32, 32);
+        player = new Player(this, 100, 100);
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
@@ -144,7 +130,7 @@ class Level2 extends Phaser.Scene {
 
 
         this.physics.add.collider(end, platforms);
-        this.physics.add.collider(end, player, () => this.scene.start("Level3"));
+        // this.physics.add.collider(end, player, () => this.scene.start("Level4"));
     }
 
     update() {

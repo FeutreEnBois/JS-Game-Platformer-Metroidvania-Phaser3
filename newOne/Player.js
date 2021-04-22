@@ -279,7 +279,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         effect.setAngle(this.body.velocity.x == 0 ? 0 : (this.flipX ? -30 : 30));
                         effect.setScale(0.5);
                         effect.setTint(0xff0000);
-                        this.scene.tweens.add({ targets: effect, alpha: 0, ease: 'Power1', duration: 250, });
+                        this.scene.tweens.add({ targets: effect, alpha: 0, ease: 'Power1', duration: 250,  }); // duration: 250,
                         break;
 
                     case 1:
