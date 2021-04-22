@@ -33,9 +33,6 @@ function shoot() {
         console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
         var bullet = bullets.create(enemy2.body.x + 5, enemy2.body.y +5, 'bullet');
         bullet.setVelocity(0);
-
-   
-
     }
 }
 
@@ -44,11 +41,10 @@ function shoot2G() {
     let l = getRandomInt(80)
     if(i == l) {
         console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
-        var bullet = bullets.create(enemy1.body.x + 5, enemy1.body.y +5, 'bullet');
+        var bullet = bullets.create(enemy3.body.x + 5, enemy3.body.y +5, 'bullet');
         bullet.setVelocityX(-200);
         bullet.body.allowGravity = false;
     }
-
 }
 
 function shoot2D() {
@@ -56,7 +52,7 @@ function shoot2D() {
     let l = getRandomInt(80)
     if(i == l) {
         console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
-        var bullet = bullets.create(enemy1.body.x + 5, enemy1.body.y +5, 'bullet');
+        var bullet = bullets.create(enemy3.body.x + 5, enemy3.body.y +5, 'bullet');
         bullet.setVelocityX(200);
         bullet.body.allowGravity = false;
     }
@@ -97,6 +93,7 @@ var controls;
 var enemy1;
 var enemy2;
 var enemy3;
+var enemy4;
 var goblin;
 var Doors
 var endX;
@@ -134,36 +131,39 @@ class Level1 extends Phaser.Scene {
         //     .setScrollFactor(0);
 
         cursors = this.input.keyboard.createCursorKeys();
-        this.Enemies = this.add.group();
+
         Doors = this.add.group();
         map.findObject('Objects', function (object) {
             if (object.name === "finishPoint") {
                 endX = object.x
                 endY = object.y
             }
+            // if (object.type === "Spawn"){
+            //     if (object.name === "Enemy"){
+            //         this.player = new PLayer(this, object.x, object.y)
+            //     }
+            // }
         })
-
-        // map.createFromObjects('Objects', "goblin", {}).forEach((object) =>
-        // { this.Enemies.add(new Goblin(this, object.x, object.y)); object.destroy(); });
 
         var end = this.add.rectangle(endX + 8, endY, 16, 16, 0x5c5a5a, 128)
         this.physics.add.group(end);
 
         // player = this.add.rectangle(32, 32, 10, 16, 0x5c5a5a);
         player = new Player(this, 32, 32);
-        goblin = new Goblin(this,250,120);
+        // goblin = new Goblin(this,250,120);
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
         this.physics.add.collider(player, platforms);
-        this.physics.add.collider(goblin, platforms);
+        // this.physics.add.collider(goblin, platforms);
+        // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
         player.body.setCollideWorldBounds(true);
 
         // !!! GOBLIN !!!
 
-        goblin.body.setCollideWorldBounds(true);
-        goblin.setScale(0.5)
+        // goblin.body.setCollideWorldBounds(true);
+        // goblin.setScale(0.5)
 
 
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
@@ -180,7 +180,7 @@ class Level1 extends Phaser.Scene {
         }, this);
 
 
-        enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
+        enemy1 = this.add.rectangle(450, 120, 10, 16, 0xff0000);
         this.physics.add.group(enemy1);
         this.physics.add.collider(enemy1, platforms);
         this.physics.add.collider(enemy1, player, hitEnemy, null, this);
@@ -191,14 +191,21 @@ class Level1 extends Phaser.Scene {
         this.physics.add.collider(enemy2, player, hitEnemy, null, this);
         enemy2.body.allowGravity = false;
 
-        enemy3 = this.add.rectangle(450, 120, 18, 16, 0xff0000);
+        enemy3 = this.add.rectangle(300, 120, 18, 20, 0xff0000);
         this.physics.add.group(enemy3);
         this.physics.add.collider(enemy3, platforms);
         this.physics.add.collider(enemy3, player, hitEnemy, null, this);
 
+        enemy4 = this.add.rectangle(400, 120, 18, 20, 0xff0000);
+        this.physics.add.group(enemy4);
+        this.physics.add.collider(enemy4, platforms);
+        this.physics.add.collider(enemy4, player, hitEnemy, null, this);
+
+
         enemy1.body.setCollideWorldBounds(true);
         enemy2.body.setCollideWorldBounds(true);
         enemy3.body.setCollideWorldBounds(true);
+        enemy4.body.setCollideWorldBounds(true);
 
         this.physics.add.collider(end, platforms);
         this.physics.add.collider(end, player, () => this.scene.start("Level2"));
@@ -300,17 +307,21 @@ class Level1 extends Phaser.Scene {
         //     // move enemy to right
         //     goblin.body.velocity.x = 30;
         // }
+        var dist = Phaser.Math.Distance.BetweenPoints(player, enemy1);
+        var dist2 = Phaser.Math.Distance.BetweenPoints(player, enemy3);
 
-        if (player.body.x <= enemy1.body.x && player.body.y == enemy1.body.y) {
-            // move enemy to left
-            enemy1.body.velocity.x = -30; 
-            shoot2G() 
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.body.x > enemy1.body.x && player.body.y == enemy1.body.y) {
-            // move enemy to right
-            enemy1.body.velocity.x = 30;
-            shoot2D()
+        if (dist < 200) {
+            if (player.x < enemy1.x) {
+                // move enemy to left
+                enemy1.body.velocity.x = -40;
+            }
+            // if player to right of enemy AND enemy moving to left (or not moving)
+            else if (player.x > enemy1.x) {
+                // move enemy to right
+                enemy1.body.velocity.x = 40;
+            }
+        } else {
+            enemy1.body.velocity.x = 0;
         }
         
         if (player.body.x < enemy2.body.x) {
@@ -323,6 +334,36 @@ class Level1 extends Phaser.Scene {
             // move enemy to right
             enemy2.body.velocity.x = 50;
             shoot()
+        }
+
+        if (dist2 < 150) {
+            if (player.x < enemy3.x) {
+                // move enemy to left
+                enemy3.body.velocity.x = 30;
+                shoot2G()
+            }
+            // if player to right of enemy AND enemy moving to left (or not moving)
+            else if (player.x > enemy3.x) {
+                // move enemy to right
+                enemy3.body.velocity.x = -30;
+                shoot2D()
+            }
+        } else {
+            enemy3.body.velocity.x = 0;
+        }
+
+        if (dist < 200) {
+            if (player.x < enemy4.x) {
+                // move enemy to left
+                enemy4.body.velocity.x = -30;
+            }
+            // if player to right of enemy AND enemy moving to left (or not moving)
+            else if (player.x > enemy4.x) {
+                // move enemy to right
+                enemy4.body.velocity.x = 30;
+            }
+        } else {
+            enemy4.body.velocity.x = 0;
         }
     }
 }
