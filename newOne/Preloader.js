@@ -34,6 +34,8 @@ class Preloader extends Phaser.Scene {
 
     preload() {
         this.load.spritesheet('hero', 'assets/hero/adventurer/adventurer.png', { frameWidth: 50, frameHeight: 37 });
+        this.load.spritesheet('dude', 'assets/hero/adventurer/dude.png', { frameWidth: 32, frameHeight: 48 });
+
         this.load.spritesheet('goblin', 'assets/Monsters_Creatures_Fantasy/Goblin/Run.png', { frameWidth: 150, frameHeight: 150 });
         // this.preloaderBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
 
@@ -72,7 +74,27 @@ class Preloader extends Phaser.Scene {
         this.anims.create({ key: 'hero_defeat', frames: this.anims.generateFrameNumbers('hero', { start: 62, end: 68 }), frameRate: 8, });
         
         
+
         this.anims.create({ key: 'goblin_walk', frames: this.anims.generateFrameNumbers('goblin', {start:0, end: 7}), repeat: -1, frameRate: 10});
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        
+        this.anims.create({
+            key: 'turn',
+            frames: [ { key: 'dude', frame: 4 } ],
+            frameRate: 20
+        });
+        
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
+        });
         // this.anims.create({ key: 'goblin_hurt', frames: this.anims.generateFrameNumbers('goblin', {start:0, end: 3}), repeat: -1, frameRate: 10});
         // this.anims.create({ key: 'goblin_death', frames: this.anims.generateFrameNumbers('goblin', {start:0, end: 3}), repeat: -1, frameRate: 10});
         

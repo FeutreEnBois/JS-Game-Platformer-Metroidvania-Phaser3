@@ -2,7 +2,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
 {
     constructor(scene,x ,y)
     {
-        super(scene,x,y,'goblin');
+        super(scene,x,y,'dude');
         scene.add.existing(this);
         scene.physics.world.enable(this);
         this.HP = 1;
@@ -10,8 +10,8 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         this.flag = 0;
         this.state = "";
         this.flipX = Phaser.Math.Between(0, 1);
-        this.body.setSize(30, 45);
-        // this.body.offset.y = -2;
+        this.body.setSize(32, 48);
+        // this.body.offset.y = -10;
         this.setCollideWorldBounds(true);
     }
 
@@ -23,7 +23,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
                 this.setVelocityX(0);
                 if(this.flag == 0)
                 {
-                    this.anims.play('goblin_hurt');
+                    this.anims.play('turn');
                     this.flag = 1;
                 }
                 if (!this.anims.isPlaying)
@@ -34,7 +34,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
                 break;
 
             default:
-                this.anims.play('goblin_walk',true);
+                this.anims.play('right',true);
                 if (this.body.velocity.x === 0)
                 {
                     this.flipX = !this.flipX;
@@ -45,7 +45,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
     }
     death()
     {
-        this.scene.add.sprite(this.x, this.y).anims.play('goblin_death');
+        this.scene.add.sprite(this.x, this.y).anims.play('turn');
         this.destroy();
     }
     

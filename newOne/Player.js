@@ -1,3 +1,5 @@
+var direction;
+
 class Player extends Phaser.Physics.Arcade.Sprite 
 {
     constructor(scene, x, y) 
@@ -94,7 +96,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 {
                     case -2:
                         this.setVelocityX(0);
-                        
+                        this.anims.play('hero_unsealth_sword', true);
                         this.flag = -1;
                         break;
 
@@ -106,7 +108,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     case 0:
                         this.combo = 0;
                         this.setVelocityX(0);
-                        
+                        this.anims.play('hero_attack_1_1', true);
                         this.flag = 1;
                         break;
 
@@ -114,7 +116,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         if (!this.anims.isPlaying)
                         {
                             
-                            
+                            this.anims.play('hero_attack_1_2', true);
                             this.flag = 2;
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
                             this.scene.time.addEvent({ delay: 100, callback: () => { attack_box.destroy() }});
@@ -133,7 +135,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                                 this.change_state("");
                                 this.attack_cooldown = 1;
                                 this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; }});
-                                
+                                this.anims.play('hero_idle2', true);
                             }
                         }
                         break;
@@ -145,7 +147,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 {
                     case 0:
                         this.setVelocityX(0);
-                        
+                        this.anims.play('hero_attack_2_1', true);
                         this.combo = 0;
                         this.flag = 1;
                         break;
@@ -153,7 +155,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     case 1:
                         if (!this.anims.isPlaying)
                         {
-                           
+                            this.anims.play('hero_attack_2_2', true);
                             this.flag = 2;
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
                             this.scene.time.addEvent({ delay: 100, callback: () => { attack_box.destroy() }});
@@ -172,7 +174,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                                 this.change_state("");
                                 this.attack_cooldown = 1;
                                 this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; }});
-                                
+                                this.anims.play('hero_idle2', true);
                             }
                         }
                         break;
@@ -183,7 +185,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
-                        
+                        this.anims.play('hero_attack_3_1', true);
                         this.flag = 1;
                         this.setVelocityX((this.flipX ? -1 : 1)*50);
                         break;
@@ -191,7 +193,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     case 1:
                         if (!this.anims.isPlaying)
                         {
-                            
+                            this.anims.play('hero_attack_3_2', true);
                             this.setVelocityX(0);
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
                             this.scene.time.addEvent({ delay: 100, callback: () => { attack_box.destroy() }});
@@ -205,7 +207,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                             this.change_state("");
                             this.attack_cooldown = 1;
                             this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; }});
-                            
+                            this.anims.play('hero_idle2', true);
                         }
                         break;
                 }
@@ -219,7 +221,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     case 0:
                         var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
                         this.scene.time.addEvent({ delay: 100, callback: () => { attack_box.destroy() }});
-                        
+                        this.anims.play('hero_attack_air', true);
                         this.flag = 1;
                         break;
 
@@ -229,7 +231,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                             this.change_state("");
                             this.attack_cooldown = 1;
                             this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; } });
-                            
+                            this.anims.play('hero_idle2', true);
                         }
                         break;
                 }
@@ -239,7 +241,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
-                        
+                        this.anims.play('hero_slide', true);
                         this.current_slide_speed = this.flipX ? -200 : 200;
                         this.setVelocityX(this.current_slide_speed)
                         this.scene.tweens.add({ targets: this, current_slide_speed: 0, ease: 'Linear', duration: this.anims.duration});
@@ -256,9 +258,9 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         else
                         {
                             this.body.velocity.x = this.current_slide_speed;
-                            // var fade = this.scene.add.image(this.x, this.y, 'hero', this.anims.currentFrame.frame.name).setAlpha(0.1).setTint(0xff0000);
-                            // fade.flipX = this.flipX;
-                            // this.scene.tweens.add({ targets: fade, alpha: 0, ease: 'Power1', duration: 250, onComplete: () => { fade.destroy() }});
+                            var fade = this.scene.add.image(this.x, this.y, 'hero', this.anims.currentFrame.frame.name).setAlpha(0.1).setTint(0xff0000);
+                            fade.flipX = this.flipX;
+                            this.scene.tweens.add({ targets: fade, alpha: 0, ease: 'Power1', duration: 250, onComplete: () => { fade.destroy() }});
                         }
                         break;
                 }
@@ -268,11 +270,12 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
+                        this.anims.play('hero_boost', true);
                         this.setVelocityY(-200)
                         this.flag = 1;
                         var effect = this.scene.add.sprite(this.x, this.y, 'fx_ring');
                         effect.on('animationcomplete', () => { effect.destroy() });
-                        
+                        effect.anims.play("fx_ring");
                         effect.setAngle(this.body.velocity.x == 0 ? 0 : (this.flipX ? -30 : 30));
                         effect.setScale(0.5);
                         effect.setTint(0xff0000);
@@ -292,6 +295,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     case 0:
                         this.flag = 1;
                         this.hurt = -1;
+                        this.anims.play('hero_hurt', true);
                         this.setVelocityX((this.flipX ? 1 : -1)*90);
                         this.setVelocityY(-100);
                         this.setTint(0xff0000);
@@ -308,6 +312,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         if (!this.anims.isPlaying)
                         {
                             this.change_state("");
+                            this.anims.play('hero_idle2', true);
                         }
                         break;
                 }
@@ -319,6 +324,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
+                        this.anims.play('hero_defeat', true);
                         this.setVelocityX((this.flipX ? 1 : -1)*125);
                         this.setVelocityY(-100);
                         this.flag = 1;
@@ -342,6 +348,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 {
                     case 0:
                         this.HP.set(0);
+                        this.anims.play('hero_defeat', true);
                         this.setVelocityX(0);
                         this.flag = 1;
                         this.death = true;
@@ -379,17 +386,21 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     else if (this.Z.isPressed)
                     {
                         this.setVelocityY(-200);
-                        
+                        this.anims.play('hero_up', true);
                     }
                     else if (direction != 0)
                     {
                         this.setVelocityX(direction*75);
+                        this.anims.play('hero_walk', true);
                         this.flipX = direction < 0;
                     }
                     else
                     {
                         this.setVelocityX(0);
-
+                        if (!this.anims.isPlaying ){ // && this.anims.getCurrentKey() != 'hero_idle2'
+                            this.anims.play('hero_idle', true);
+                        }
+                            
                     }
                 }
                 else
@@ -410,8 +421,12 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     }
                     else
                         this.setVelocityX(0);
-                    if (this.body.velocity.y < 0 && this.Z.isUp)
-                        this.body.velocity.y *= 0.8;
+                    // if (this.body.velocity.y < 0 && this.Z.isUp)
+                    //     this.body.velocity.y *= 0.8;
+                    if (this.body.velocity.y > 0 && !this.anims.isPlaying ) // && this.anims.getCurrentKey() != 'hero_fall'
+                            this.anims.play('hero_fall', true);
+                    else if (this.body.velocity.y < 0 && this.Z.isUp)
+                            this.body.velocity.y *= 0.8;
                 }
                 break;
         }
