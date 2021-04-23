@@ -10,7 +10,8 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         this.flag = 0;
         this.state = "";
         this.flipX = Phaser.Math.Between(0, 1);
-        this.body.setSize(32, 48);
+        this.setScale(0.8);
+        this.body.setSize(32, 45);
         // this.body.offset.y = -10;
         this.setCollideWorldBounds(true);
     }
@@ -19,22 +20,10 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
     {
         switch(this.state)
         {
-            case "Hurt":
-                this.setVelocityX(0);
-                if(this.flag == 0)
-                {
-                    this.anims.play('turn');
-                    this.flag = 1;
-                }
-                if (!this.anims.isPlaying)
-                {
-                    this.state = "";
-                    this.body.velocity.x = this.flipX ? 15 : -15;
-                }
-                break;
-
             default:
-                this.anims.play('right',true);
+                if (!this.anims.isPlaying){
+                    this.anims.play('left',true);
+                }
                 if (this.body.velocity.x === 0)
                 {
                     this.flipX = !this.flipX;
@@ -42,11 +31,6 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
                 }
                 break;
         }
-    }
-    death()
-    {
-        this.scene.add.sprite(this.x, this.y).anims.play('turn');
-        this.destroy();
     }
     
 }; 

@@ -103,6 +103,7 @@ var Doors
 var endX;
 var endY;
 var bullets;
+var Enemies;
 
 class Level1 extends Phaser.Scene {
     constructor() {
@@ -137,7 +138,7 @@ class Level1 extends Phaser.Scene {
         //     .setScrollFactor(0);
 
         cursors = this.input.keyboard.createCursorKeys();
-
+        Enemies = this.add.group();
         Doors = this.add.group();
         map.findObject('Objects', function (object) {
             if (object.name === "finishPoint") {
@@ -151,6 +152,9 @@ class Level1 extends Phaser.Scene {
             // }
         })
 
+        map.createFromObjects('goblin', "goblin", {}).forEach((object) => 
+        { Enemies.add(new Goblin(this, object.x, object.y)); object.destroy(); });
+
         var end = this.add.rectangle(endX + 8, endY, 16, 16, 0x5c5a5a, 128)
         this.physics.add.group(end);
 
@@ -160,6 +164,8 @@ class Level1 extends Phaser.Scene {
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
+        this.physics.add.overlap(player, Enemies, () => { player.player_get_hit() }, null, this);
+        this.physics.add.collider(platforms, Enemies);
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(player, this.flames, () => this.scene.restart())
         // this.physics.add.collider(goblin, platforms);
@@ -249,6 +255,7 @@ class Level1 extends Phaser.Scene {
 
         // Player moovements
         player.update()
+        Enemies.getChildren().forEach((enemy) => { enemy.update(); });
 
         if (keyZ.isDown) {
             console.log('Z key pressed')
