@@ -1,7 +1,9 @@
+
+//retart current scene if player get touch by an enemy
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
-    // music.stop();
+    music.stop();
     this.scene.restart();
     gameOver = true;
 }
@@ -98,6 +100,7 @@ class Level4 extends Phaser.Scene {
 
         player.body.setCollideWorldBounds(true);
 
+        //set the keyboard input
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -111,6 +114,13 @@ class Level4 extends Phaser.Scene {
             }
         }, this);
 
+        //create some enemy
+        enemy1 = this.add.sprite(435, 120, 'hero');
+        enemy1.setScale(3)
+        enemy1.flipX = 1;
+        this.physics.add.group(enemy1);
+        this.physics.add.collider(enemy1, platforms);
+        this.physics.add.collider(enemy1, player, hitEnemy, null, this);
 
 
 
@@ -133,16 +143,18 @@ class Level4 extends Phaser.Scene {
         // P for pause
         if (keyP.isDown) {
             this.physics.pause();
+            music.pause();
         } 
         // O for resume
         else if (keyO.isDown){
             this.physics.resume();
+            music.resume();
         }
         // I for restart
         else if (keyI.isDown){
             // music.stop();
             this.scene.restart(); // restart current scene
-    
+            music.stop();
         }
     
         // Player moovements

@@ -10,14 +10,15 @@
 //     },
 // }
 
-
+//retart current scene if player get touch by an enemy
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
-    // music.stop();
+    music.stop();
     this.scene.restart();
     gameOver = true;
 }
+
 
 var worldLayer;
 var belowLayer;
@@ -52,8 +53,6 @@ var endY;
 class Level2 extends Phaser.Scene {
     constructor() {
         super({ key: "Level2" });
-
-
     }
 
     preload(){
@@ -112,6 +111,7 @@ class Level2 extends Phaser.Scene {
 
         player.body.setCollideWorldBounds(true);
 
+        //set the keyboard input
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -125,7 +125,7 @@ class Level2 extends Phaser.Scene {
             }
         }, this);
 
-
+        //create some enemy
         enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
         this.physics.add.group(enemy1);
         this.physics.add.collider(enemy1, platforms);
@@ -160,15 +160,18 @@ class Level2 extends Phaser.Scene {
         // P for pause
         if (keyP.isDown) {
             this.physics.pause();
+            music.pause();
         } 
         // O for resume
         else if (keyO.isDown){
             this.physics.resume();
+            music.resume();
         }
         // I for restart
         else if (keyI.isDown){
             // music.stop();
             this.scene.restart(); // restart current scene
+            music.stop();
     
         }
     
@@ -223,36 +226,6 @@ class Level2 extends Phaser.Scene {
         // {
         //     player.body.setVelocityY(-300);
         // }
-        // if player to left of enemy AND enemy moving to right (or not moving)
-        if (player.x <= enemy1.x && player.y == enemy1.y) {
-            // move enemy to left
-            enemy1.body.velocity.x = -30;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy1.x && player.y == enemy1.y) {
-            // move enemy to right
-            enemy1.body.velocity.x = 30;
-        }
-    
-        if (player.x <= enemy2.x) {
-            // move enemy to left
-            // enemy2.body.velocity.x = -50;
-            enemy2.body.velocity.x = -50;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy2.x) {
-            // move enemy to right
-            enemy2.body.velocity.x = 50;
-        }
-    
-        if (player.x <= (enemy3.x+10) && player.y == enemy3.y) {
-            // move enemy to left
-            enemy3.body.velocity.x = 20;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x == (enemy3.x+10) && player.y == enemy3.y) {
-            // move enemy to right
-            enemy3.body.velocity.x = -20;
-        }
+
     }
 }

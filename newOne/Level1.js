@@ -10,14 +10,17 @@
 //     },
 // }
 
-function hitEnemy(player, enemy1, enemy2) {
+
+//restart current scene when you get touch by an enemy
+function hitEnemy(player, enemy1, enemy2) { 
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
-    // music.stop();
+    music.stop();
     this.scene.restart();
     gameOver = true;
 }
 
+//restart current scene when you get touch by an bullet
 function hitBullet(player, bullets) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
@@ -26,6 +29,7 @@ function hitBullet(player, bullets) {
     gameOver = true;
 }
 
+//drop a bullet (batMon)
 function shoot() {
     let i = 1
     let l = getRandomInt(100)
@@ -36,6 +40,7 @@ function shoot() {
     }
 }
 
+//shoot a bullet to left
 function shoot2G() {
     let i = 1
     let l = getRandomInt(80)
@@ -47,6 +52,7 @@ function shoot2G() {
     }
 }
 
+//shoot a bullet to right
 function shoot2D() {
     let i = 1
     let l = getRandomInt(80)
@@ -59,10 +65,7 @@ function shoot2D() {
 
 }
 
-
-    
-
-
+// get an ramdom number
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -103,11 +106,10 @@ var bullets;
 class Level1 extends Phaser.Scene {
     constructor() {
         super({ key: "Level1" });
-
-
     }
 
     create() {
+
         music = this.sound.add('luna');
         music.setVolume(volume);
         music.play();
@@ -165,7 +167,7 @@ class Level1 extends Phaser.Scene {
         // goblin.body.setCollideWorldBounds(true);
         // goblin.setScale(0.5)
 
-
+        //set the keyboard input
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -179,7 +181,7 @@ class Level1 extends Phaser.Scene {
             }
         }, this);
 
-
+        //create some enemy
         enemy1 = this.add.rectangle(450, 120, 10, 16, 0xff0000);
         this.physics.add.group(enemy1);
         this.physics.add.collider(enemy1, platforms);
@@ -222,22 +224,21 @@ class Level1 extends Phaser.Scene {
                 dash = nbrDash
             }
         }
-        // Apply the controls to the camera each update tick of the game
 
-        // P for pause
+        // P for pause the physics
         if (keyP.isDown) {
             this.physics.pause();
             music.pause();
         }
-        // O for resume
+        // O for resume the physics
         else if (keyO.isDown) {
             this.physics.resume();
             music.resume();
         }
-        // I for restart
+        // I for restart current scene
         else if (keyI.isDown) {
             music.stop();
-            this.scene.restart(); // restart current scene
+            this.scene.restart(); 
 
         }
 
@@ -278,6 +279,7 @@ class Level1 extends Phaser.Scene {
         //     // player.anims.play('turn');
         // }
 
+
         if (keyZ.isDown) {
             console.log('Z key pressed')
         } else if (keyS.isDown) {
@@ -307,62 +309,62 @@ class Level1 extends Phaser.Scene {
         //     // move enemy to right
         //     goblin.body.velocity.x = 30;
         // }
+
+
+        // distance (on pixel) between player and each enemy 
         var dist = Phaser.Math.Distance.BetweenPoints(player, enemy1);
         var dist2 = Phaser.Math.Distance.BetweenPoints(player, enemy3);
+        var dist3 = Phaser.Math.Distance.BetweenPoints(player, enemy4);
 
         if (dist < 200) {
+            // enemy go left(-) or right(+) if player is left or right of the enemy
             if (player.x < enemy1.x) {
-                // move enemy to left
                 enemy1.body.velocity.x = -40;
             }
-            // if player to right of enemy AND enemy moving to left (or not moving)
             else if (player.x > enemy1.x) {
-                // move enemy to right
                 enemy1.body.velocity.x = 40;
             }
         } else {
+            // enemy dont move
             enemy1.body.velocity.x = 0;
         }
         
+         // enemy go left(-) or right(+) if player is left or right of the enemy
         if (player.body.x < enemy2.body.x) {
-            // move enemy to left
             enemy2.body.velocity.x = -50;
-            // shoot()
+            shoot()
         }
-        // if player to right of enemy AND enemy moving to left (or not moving)
         else if (player.body.x > enemy2.body.x) {
-            // move enemy to right
             enemy2.body.velocity.x = 50;
-            // shoot()
+            shoot()
         }
 
+
         if (dist2 < 150) {
+            // enemy go left(-) or right(+) if player is left or right of the enemy
             if (player.x < enemy3.x) {
-                // move enemy to left
                 enemy3.body.velocity.x = 30;
-                // shoot2G()
+                shoot2G()
             }
-            // if player to right of enemy AND enemy moving to left (or not moving)
             else if (player.x > enemy3.x) {
-                // move enemy to right
                 enemy3.body.velocity.x = -30;
-                // shoot2D()
+                shoot2D()
             }
         } else {
+            // enemy dont move
             enemy3.body.velocity.x = 0;
         }
 
         if (dist < 200) {
+            // enemy go left(-) or right(+) if player is left or right of the enemy
             if (player.x < enemy4.x) {
-                // move enemy to left
                 enemy4.body.velocity.x = -30;
             }
-            // if player to right of enemy AND enemy moving to left (or not moving)
             else if (player.x > enemy4.x) {
-                // move enemy to right
                 enemy4.body.velocity.x = 30;
             }
         } else {
+            // enemy dont move
             enemy4.body.velocity.x = 0;
         }
     }

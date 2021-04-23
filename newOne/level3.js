@@ -1,7 +1,9 @@
+
+//retart current scene if player get touch by an enemy
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
-    // music.stop();
+    music.stop();
     this.scene.restart();
     gameOver = true;
 }
@@ -97,6 +99,7 @@ class Level3 extends Phaser.Scene {
         this.physics.add.collider(player, platforms);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
+        //set the keyboard input
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -111,7 +114,7 @@ class Level3 extends Phaser.Scene {
         }, this);
         
         
-
+        //create some enemy
         enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
         this.physics.add.group(enemy1);
         this.physics.add.collider(enemy1, platforms);
@@ -132,6 +135,7 @@ class Level3 extends Phaser.Scene {
         this.physics.add.collider(end, platforms);
         this.physics.add.collider(end, player, () => this.scene.start("Level4"));
 
+        // set a following player camera
         this.cameras.main.setBounds(0, 0, worldLayer.displayWidth, worldLayer.displayHeight);
         this.cameras.main.startFollow(player);
         
@@ -150,15 +154,18 @@ class Level3 extends Phaser.Scene {
         // P for pause
         if (keyP.isDown) {
             this.physics.pause();
+            music.pause();
         } 
         // O for resume
         else if (keyO.isDown){
             this.physics.resume();
+            music.resume();
         }
         // I for restart
         else if (keyI.isDown){
             // music.stop();
             this.scene.restart(); // restart current scene
+            music.stop();
     
         }
     
@@ -173,38 +180,6 @@ class Level3 extends Phaser.Scene {
             console.log('D key pressed')
         } else if (keyQ.isDown) {
             console.log('Q key pressed')
-        }
-        // // Jump
-        // if player to left of enemy AND enemy moving to right (or not moving)
-        if (player.x <= enemy1.x && player.y == enemy1.y) {
-            // move enemy to left
-            enemy1.body.velocity.x = -30;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy1.x && player.y == enemy1.y) {
-            // move enemy to right
-            enemy1.body.velocity.x = 30;
-        }
-    
-        if (player.x <= enemy2.x) {
-            // move enemy to left
-            // enemy2.body.velocity.x = -50;
-            enemy2.body.velocity.x = -50;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x >= enemy2.x) {
-            // move enemy to right
-            enemy2.body.velocity.x = 50;
-        }
-    
-        if (player.x <= (enemy3.x+10) && player.y == enemy3.y) {
-            // move enemy to left
-            enemy3.body.velocity.x = 20;
-        }
-        // if player to right of enemy AND enemy moving to left (or not moving)
-        else if (player.x == (enemy3.x+10) && player.y == enemy3.y) {
-            // move enemy to right
-            enemy3.body.velocity.x = -20;
         }
     }
 }
