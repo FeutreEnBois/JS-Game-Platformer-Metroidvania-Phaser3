@@ -249,41 +249,6 @@ class Level1 extends Phaser.Scene {
 
         // Player moovements
         player.update()
-        // else if (keyQ.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(-1000)
-        //     // speedBoostG()
-        // } else if (keyD.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     // speedBoostD()
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(1000)
-        // }       // Idle
-
-        // else if (keyQ.isDown) {
-        //     player.body.setVelocityX(-80);
-
-        //     // player.anims.play('left', true);
-        // }
-        // // moove right
-        // else if (keyD.isDown) {
-        //     player.body.setVelocityX(80);
-
-        //     // player.anims.play('right', true);
-
-        // } else {
-        //     player.body.setVelocityX(0);
-
-        //     // player.anims.play('turn');
-        // }
-
 
         if (keyZ.isDown) {
             console.log('Z key pressed')
@@ -295,12 +260,6 @@ class Level1 extends Phaser.Scene {
             console.log('Q key pressed')
         }
         // // Jump
-        // if (cursors.up.isDown && player.body.touching.down) // && player.body.touching.down
-        // {
-        //     player.body.setVelocityY(-300);
-        // }
-        // if player to left of enemy AND enemy moving to right (or not moving)
-
 
         // !!! GOBLIN !!!
 
