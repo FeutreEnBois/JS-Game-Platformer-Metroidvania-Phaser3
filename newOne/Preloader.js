@@ -29,7 +29,7 @@ class Preloader extends Phaser.Scene {
         this.load.tilemapTiledJSON("lvl4", "assets/lvl/lvl4/arene-boss.json");
 
         // AUDIO
-
+        this.load.audio('bossMusic', 'assets/audio/theme/Amygdala.mp3')
         this.load.audio('luna', 'assets/audio/theme/TheThing8bit.mp3');
     };
 
@@ -87,6 +87,6 @@ class Preloader extends Phaser.Scene {
 
 
 
-        this.scene.start('Level2');
+        this.scene.start('Level4');
     };
 }

@@ -29,7 +29,6 @@ var delayBTWDash = 60;
 var delay = 0;
 var cooldownDash = false;
 var volume = 0.4;
-var music;
 var controls;
 var enemy1;
 var enemy2;
@@ -51,7 +50,11 @@ class Level4 extends Phaser.Scene {
     }
 
     create() {
-
+        this.sound.stopAll();
+        this.music = this.sound.add('bossMusic');
+        this.music.setVolume(0.4);
+        this.music.setLoop(true);
+        this.music.play();
         const map = this.make.tilemap({ key: "lvl4" });
 
         let tileset = map.addTilesetImage("oubliette", "tileset");
@@ -143,18 +146,18 @@ class Level4 extends Phaser.Scene {
         // P for pause
         if (keyP.isDown) {
             this.physics.pause();
-            music.pause();
+            this.music.pause();
         } 
         // O for resume
         else if (keyO.isDown){
             this.physics.resume();
-            music.resume();
+            this.music.resume();
         }
         // I for restart
         else if (keyI.isDown){
             // music.stop();
             this.scene.restart(); // restart current scene
-            music.stop();
+            this.music.stop();
         }
     
         // Player moovements
