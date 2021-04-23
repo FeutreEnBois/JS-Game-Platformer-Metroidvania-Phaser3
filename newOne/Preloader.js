@@ -23,6 +23,9 @@ class Preloader extends Phaser.Scene {
         // Load all assets
         this.load.image("bullet", "assets/Monsters_Creatures_Fantasy/effect/bullet.png");
         this.load.image("tileset", "assets/lvl/oubliette_tileset.png");
+        this.load.image("button_idle", "assets/Button.png");
+        this.load.image("Nom", "assets/Nom.png");
+        this.load.image("background", "assets/black-background.jpg");
         this.load.tilemapTiledJSON("lvl", "assets/lvl/lvl2/lvl2.json");
         this.load.tilemapTiledJSON("lvl3", "assets/lvl/lvl3/lvl1.json");
         this.load.tilemapTiledJSON("intro", "assets/lvl/intro/IntroOubliette.json");
