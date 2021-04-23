@@ -1,12 +1,25 @@
+var Button;
+var Nom;
 class MainMenu extends Phaser.Scene
 {
     constructor()
     {
         super({ key: "MainMenu"});
-        this.Controls = false;
-        this.state = "";
+        // this.Controls = false;
+        // this.state = "";
     }
-
+    create(){
+        this.add.image(400,300, "background");
+        Nom = this.add.image(253,50, "Nom");
+        Button = new Menu_Button(this, 244, 150).setInteractive()
+    }
+    update(){
+        Button.setScale(0.1)
+        Nom.setScale(0.3)
+        Button.on('pointerover', () => Button.setTint(0xffd700));
+        Button.on('pointerout', () => Button.setTint(0xffffff));
+        Button.on('pointerdown', () => this.scene.start("Level2"));
+    }
     transitioning(transition_to)
     {
         this.transition_progess = 0;
@@ -42,15 +55,5 @@ class MainMenu extends Phaser.Scene
         this.time.addEvent({ delay: 1000 + 150*this.Button.length, callback: () => { 
             this.Control = true
         }})
-    }
-
-    preload(){
-
-    }
-
-    create(){
-        this.Button = [];
-
-        
     }
 }
