@@ -29,46 +29,6 @@ function hitBullet(player, bullets) {
     gameOver = true;
 }
 
-//drop a bullet (batMon)
-function shoot() {
-    let i = 1
-    let l = getRandomInt(100)
-    if(i == l) {
-        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-        var bullet = bullets.create(enemy2.body.x + 5, enemy2.body.y +5, 'bullet');
-        bullet.setVelocity(0);
-    }
-}
-
-//shoot a bullet to left
-function shoot2G() {
-    let i = 1
-    let l = getRandomInt(80)
-    if(i == l) {
-        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
-        var bullet = bullets.create(enemy3.body.x + 5, enemy3.body.y +5, 'bullet');
-        bullet.setVelocityX(-200);
-        bullet.body.allowGravity = false;
-    }
-}
-
-//shoot a bullet to right
-function shoot2D() {
-    let i = 1
-    let l = getRandomInt(80)
-    if(i == l) {
-        console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
-        var bullet = bullets.create(enemy3.body.x + 5, enemy3.body.y +5, 'bullet');
-        bullet.setVelocityX(200);
-        bullet.body.allowGravity = false;
-    }
-
-}
-
-// get an ramdom number
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
 
 var worldLayer;
 var belowLayer;
@@ -255,7 +215,24 @@ class Level1 extends Phaser.Scene {
 
         // Player moovements
         player.update()
-        Enemies.getChildren().forEach((enemy) => { enemy.update(); });
+        Enemies.getChildren().forEach((enemy) => { 
+            enemy.update();
+            var dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
+            if (dist < 200) {
+                // enemy go left(-) or right(+) if player is left or right of the enemy
+                if (player.x < enemy.x) {
+                    enemy.body.velocity.x = -40;
+                    enemy.shoot2G()
+                }
+                else if (player.x > enemy.x) {
+                    enemy.body.velocity.x = 40;
+                    enemy.shoot2D()
+                }
+            } else {
+                // enemy dont move
+                enemy.body.velocity.x = 0;
+            }
+         });
 
         if (keyZ.isDown) {
             console.log('Z key pressed')
@@ -283,60 +260,10 @@ class Level1 extends Phaser.Scene {
 
 
         // distance (on pixel) between player and each enemy 
-        var dist = Phaser.Math.Distance.BetweenPoints(player, enemy1);
+        
         var dist2 = Phaser.Math.Distance.BetweenPoints(player, enemy3);
         var dist3 = Phaser.Math.Distance.BetweenPoints(player, enemy4);
 
-        if (dist < 200) {
-            // enemy go left(-) or right(+) if player is left or right of the enemy
-            if (player.x < enemy1.x) {
-                enemy1.body.velocity.x = -40;
-            }
-            else if (player.x > enemy1.x) {
-                enemy1.body.velocity.x = 40;
-            }
-        } else {
-            // enemy dont move
-            enemy1.body.velocity.x = 0;
-        }
         
-         // enemy go left(-) or right(+) if player is left or right of the enemy
-        if (player.body.x < enemy2.body.x) {
-            enemy2.body.velocity.x = -50;
-            shoot()
-        }
-        else if (player.body.x > enemy2.body.x) {
-            enemy2.body.velocity.x = 50;
-            shoot()
-        }
-
-
-        if (dist2 < 150) {
-            // enemy go left(-) or right(+) if player is left or right of the enemy
-            if (player.x < enemy3.x) {
-                enemy3.body.velocity.x = 30;
-                shoot2G()
-            }
-            else if (player.x > enemy3.x) {
-                enemy3.body.velocity.x = -30;
-                shoot2D()
-            }
-        } else {
-            // enemy dont move
-            enemy3.body.velocity.x = 0;
-        }
-
-        if (dist < 200) {
-            // enemy go left(-) or right(+) if player is left or right of the enemy
-            if (player.x < enemy4.x) {
-                enemy4.body.velocity.x = -30;
-            }
-            else if (player.x > enemy4.x) {
-                enemy4.body.velocity.x = 30;
-            }
-        } else {
-            // enemy dont move
-            enemy4.body.velocity.x = 0;
-        }
     }
 }

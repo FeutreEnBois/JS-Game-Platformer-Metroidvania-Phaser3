@@ -1,3 +1,8 @@
+
+
+
+
+
 class Goblin extends Phaser.Physics.Arcade.Sprite
 {
     constructor(scene,x ,y)
@@ -23,22 +28,56 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
                 if (!this.anims.isPlaying){
                     this.anims.play('left',true);
                 }
-                if (this.body.velocity.x === 0)
-                {
-                    this.flipX = !this.flipX;
-                    this.body.velocity.x = this.flipX ? 15 : -15;
-                }
                 break;
         }
     }
+
+    shoot() {
+        let i = 1
+        let l = this.getRandomInt(100)
+        if(i == l) {
+            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+            var bullet = bullets.create(this.body.x + 5, this.body.y +5, 'bullet');
+            bullet.setVelocity(0);
+        }
+    }
     
+    //shoot a bullet to left
+    shoot2G() {
+        let i = 1
+        let l = this.getRandomInt(80)
+        if(i == l) {
+            console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+            var bullet = bullets.create(this.body.x + 5, this.body.y +5, 'bullet');
+            bullet.setVelocityX(-200);
+            bullet.body.allowGravity = false;
+        }
+    }
+    
+    //shoot a bullet to right
+    shoot2D() {
+        let i = 1
+        let l = this.getRandomInt(80)
+        if(i == l) {
+            console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+            var bullet = bullets.create(this.body.x + 5, this.body.y +5, 'bullet');
+            bullet.setVelocityX(200);
+            bullet.body.allowGravity = false;
+        }
+    
+    }
+    
+    // get an ramdom number
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
 }; 
 
 class Bat extends Phaser.Physics.Arcade.Sprite
 {
     constructor(scene, x, y)
     {
-        super(scene, x, y, 'bat');
+        super(scene, x, y, 'dude');
         scene.add.existing(this);
         scene.physics.world.enable(this);
         this.HP = 1;
@@ -49,7 +88,7 @@ class Bat extends Phaser.Physics.Arcade.Sprite
         this.body.setSize(24, 24);
         this.body.setAllowGravity(false);
         this.setCollideWorldBounds(true);
-        this.anims.play('bat');
+        this.anims.play('left');
         this.body.velocity.y = this.speed;
     }
     update()
@@ -59,11 +98,6 @@ class Bat extends Phaser.Physics.Arcade.Sprite
             this.speed = -this.speed;
             this.body.velocity.y = this.speed;
         }
-    }
-    death()
-    {
-        this.scene.add.sprite(this.x, this.y).anims.play('bat_death');
-        this.destroy();
     }
 }
 
