@@ -73,6 +73,7 @@ function getRandomInt(max) {
 var worldLayer;
 var belowLayer;
 var aboveLayer;
+var deathLayer;
 var player;
 var cursors;
 var playerSpeed = 150;
@@ -109,18 +110,21 @@ class Level1 extends Phaser.Scene {
     }
 
     create() {
-
+        this.sound.stopAll();
         music = this.sound.add('luna');
         music.setVolume(volume);
+        music.setLoop(true);
         music.play();
 
         const map = this.make.tilemap({ key: "intro" });
         const tileset = map.addTilesetImage("oubliette", "tileset");
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
+        deathLayer = map.createStaticLayer("death", tileset, 0, 0)
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
         aboveLayer = map.createStaticLayer("sol", tileset, 0, 0)
 
         belowLayer.setCollision([0, 5]);
+        this.flames = deathLayer.setCollisionByProperty({ death : true});
         platforms = aboveLayer.setCollisionByProperty({ collides: true });
         // Help text that has a "fixed" position on the screen
         // this.add
@@ -157,6 +161,7 @@ class Level1 extends Phaser.Scene {
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
         this.physics.add.collider(player, platforms);
+        this.physics.add.collider(player, this.flames, () => this.scene.restart())
         // this.physics.add.collider(goblin, platforms);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 

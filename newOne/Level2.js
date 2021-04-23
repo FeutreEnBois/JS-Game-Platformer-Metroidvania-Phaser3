@@ -14,7 +14,6 @@
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
-    music.stop();
     this.scene.restart();
     gameOver = true;
 }
@@ -65,11 +64,13 @@ class Level2 extends Phaser.Scene {
         const map = this.make.tilemap({ key: "lvl" });
 
         let tileset = map.addTilesetImage("oubliette_tileset", "tileset");
+        this.deathLayer = map.createStaticLayer("death", tileset, 0,0)
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
         aboveLayer = map.createStaticLayer("sol", tileset, 0, 0)
 
         belowLayer.setCollision([0, 5]);
+        this.flames = this.deathLayer.setCollisionByProperty({ death: true});
         platforms = aboveLayer.setCollisionByProperty({ collides: true });
         // Help text that has a "fixed" position on the screen
         // this.add
@@ -106,6 +107,7 @@ class Level2 extends Phaser.Scene {
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
+        this.physics.add.collider(player, this.flames, () => this.scene.restart());
         this.physics.add.collider(player, platforms);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
