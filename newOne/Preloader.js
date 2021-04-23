@@ -12,6 +12,7 @@ class Preloader extends Phaser.Scene {
     preload() {
         this.load.spritesheet('hero', 'assets/hero/adventurer/adventurer.png', { frameWidth: 50, frameHeight: 37 });
         this.load.spritesheet('dude', 'assets/hero/adventurer/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('boss', 'assets/Monsters_Creatures_Fantasy/boss/adventurer.png', { frameWidth: 50, frameHeight: 37 });
 
         this.load.spritesheet('goblin', 'assets/Monsters_Creatures_Fantasy/Goblin/Run.png', { frameWidth: 150, frameHeight: 150 });
         // this.preloaderBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
@@ -38,7 +39,7 @@ class Preloader extends Phaser.Scene {
         this.anims.create({ key: 'hero_idle', frames: this.anims.generateFrameNumbers('hero', { start: 0, end: 3 }), repeat: -1, frameRate: 7, });
         this.anims.create({ key: 'hero_idle2', frames: this.anims.generateFrameNumbers('hero', { start: 38, end: 41 }), repeat: -1, frameRate: 7, });
         this.anims.create({ key: 'hero_boost', frames: this.anims.generateFrameNumbers('hero', { start: 17, end: 21 }), frameRate: 20, repeat: 1 });
-        this.anims.create({ key: 'hero_up', frames: this.anims.generateFrameNumbers('hero', { start: 77, end: 78 }), repeat: -1, frameRate: 8, });
+        this.anims.create({ key: 'hero_up', frames: this.anims.generateFrameNumbers('hero', { start: 69, end: 71 }), repeat: -1, frameRate: 8, });
         this.anims.create({ key: 'hero_fall', frames: this.anims.generateFrameNumbers('hero', { start: 22, end: 23 }), repeat: -1, frameRate: 8, });
         this.anims.create({ key: 'hero_unsealth_sword', frames: this.anims.generateFrameNumbers('hero', { start: 69, end: 73 }), frameRate: 20, });
         this.anims.create({ key: 'hero_attack_1_1', frames: this.anims.generateFrameNumbers('hero', { start: 42, end: 43 }), frameRate: 15, });
@@ -87,6 +88,6 @@ class Preloader extends Phaser.Scene {
 
 
 
-        this.scene.start('Level4');
+        this.scene.start('Level2');
     };
 }

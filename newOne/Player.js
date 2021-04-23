@@ -40,10 +40,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
     {
         if(this.isVulnerable() && !this.death)
         {
-            if(!this.HP.add(-1))
-                this.change_state("Hurt");
-            else
-                this.change_state("Death");
+            this.change_state("Death");
         }
     }
 

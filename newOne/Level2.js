@@ -48,6 +48,7 @@ var enemy3;
 var Doors
 var endX;
 var endY;
+var Enemies;
 
 class Level2 extends Phaser.Scene {
     constructor() {
@@ -83,19 +84,20 @@ class Level2 extends Phaser.Scene {
         //     .setScrollFactor(0);
 
         cursors = this.input.keyboard.createCursorKeys();
-
+        Enemies = this.add.group();
         Doors = this.add.group(); 
         map.findObject('Objects', function(object){
             if (object.name === "finishPoint"){
                 endX = object.x
                 endY = object.y
             }
-            // if (object.type === "Spawn"){
-            //     if (object.name === "Enemy"){
-            //         this.player = new PLayer(this, object.x, object.y)
+            // if (object.type === "spawn"){
+            //     if (object.name === "goblin"){
+            //         Enemies.add(new Goblin(this, object.x, object.y)); object.destroy(); }
             //     }
-            // }
         })
+        map.createFromObjects('goblin', "goblin", {}).forEach((object) => 
+	    	{ Enemies.add(new Goblin(this, object.x, object.y)); object.destroy(); });
 
         var end = this.add.rectangle(endX+8, endY, 16, 16, 0x5c5a5a, 128)
         this.physics.add.group(end);
@@ -107,8 +109,10 @@ class Level2 extends Phaser.Scene {
 
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
+        this.physics.add.overlap(player, Enemies, () => { player.player_get_hit() }, null, this);
         this.physics.add.collider(player, this.flames, () => this.scene.restart());
         this.physics.add.collider(player, platforms);
+        this.physics.add.collider(platforms, Enemies);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
         player.body.setCollideWorldBounds(true);
@@ -179,41 +183,8 @@ class Level2 extends Phaser.Scene {
     
         // Player moovements
         player.update()
-        // else if (keyQ.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(-1000)
-        //     // speedBoostG()
-        // } else if (keyD.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     // speedBoostD()
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(1000)
-        // }       // Idle
-    
-        // else if (keyQ.isDown) {
-        //     player.body.setVelocityX(-80);
-    
-        //     // player.anims.play('left', true);
-        // }
-        // // moove right
-        // else if (keyD.isDown) {
-        //     player.body.setVelocityX(80);
-    
-        //     // player.anims.play('right', true);
-    
-        // } else {
-        //     player.body.setVelocityX(0);
-    
-        //     // player.anims.play('turn');
-        // }
-    
+        Enemies.getChildren().forEach((enemy) => { enemy.update(); });
+
         if (keyZ.isDown) {
             console.log('Z key pressed')
         } else if (keyS.isDown) {

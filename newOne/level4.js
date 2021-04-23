@@ -3,7 +3,6 @@
 function hitEnemy(player, enemy1 , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
-    music.stop();
     this.scene.restart();
     gameOver = true;
 }
@@ -118,7 +117,7 @@ class Level4 extends Phaser.Scene {
         }, this);
 
         //create some enemy
-        enemy1 = this.add.sprite(435, 120, 'hero');
+        enemy1 = this.add.sprite(435, 120, 'boss');
         enemy1.setScale(3)
         enemy1.flipX = 1;
         this.physics.add.group(enemy1);
