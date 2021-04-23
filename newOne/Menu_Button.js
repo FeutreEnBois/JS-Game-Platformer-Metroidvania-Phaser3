@@ -15,13 +15,7 @@ class Menu_Button extends Phaser.GameObjects.Sprite
     	this.text.setPosition(this.x, this.y);
     	this.text.setAlpha(this.alpha);
     	this.text.setScale(this.scaleX, this.scaleY);
-    }
-
-
-    focus()
-    {
-    	this.setTexture("button_focus");
-        this.text.setFontSize(17).setOrigin(0.5, 0.65);
+        this.idle()
     }
 
     idle()
