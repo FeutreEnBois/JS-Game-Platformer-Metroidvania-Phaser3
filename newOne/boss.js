@@ -28,19 +28,6 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
 
     attack_hit(attack, object) {
         this.scene.cameras.main.shake(50, 0.02);
-
-        // this.scene.sound.play('snd_sword_hit', { rate: Phaser.Math.FloatBetween(1, 1.25) });
-
-        // var effect = this.scene.add.sprite(attack.x, attack.y, 'fx_attack').setAngle(Math.random() * 360).setScale(0.5);
-        // effect.anims.play("fx_attack").on('animationcomplete', () => { effect.destroy() });
-
-
-        // var slash = this.scene.add.sprite(attack.x, attack.y, 'fx_slash', 5).setAngle(Math.random() * 360).setScale(2, 1);
-        // this.scene.tweens.add({ targets: slash, 
-        //     scaleY: { value: 0, ease: 'Sine.easeOut', duration: 250}, 
-        //     scaleX: { value: 0, ease: 'Linear', duration: 250},
-        //     onComplete: () => { slash.destroy() } });
-        // attack.destroy();
         object.change_state("Death");
         
 
@@ -102,7 +89,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                                 this.change_state("");
                                 this.attack_cooldown = 1;
                                 this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; } });
-                                this.anims.play('hero_idle2', true);
+                                this.anims.play('boss_idle2', true);
                             }
                         }
                         break;
@@ -138,7 +125,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                                 this.change_state("");
                                 this.attack_cooldown = 1;
                                 this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; } });
-                                this.anims.play('hero_idle2', true);
+                                this.anims.play('boss_idle2', true);
                             }
                         }
                         break;
@@ -169,7 +156,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                             this.change_state("");
                             this.attack_cooldown = 1;
                             this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; } });
-                            this.anims.play('hero_idle2', true);
+                            this.anims.play('boss_idle2', true);
                         }
                         break;
                 }
@@ -179,7 +166,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     case 0:
                         // this.scene.sound.play('snd_slide', { rate: 1.5, volume: 0.8 });
                         this.anims.play('boss_slide', true);
-                        this.current_slide_speed = !this.direction ? -200 : 200;
+                        this.current_slide_speed = this.flipX ? -200 : 200;
                         this.setVelocityX(this.current_slide_speed)
                         this.scene.tweens.add({ targets: this, current_slide_speed: 0, ease: 'Linear', duration: this.anims.duration });
                         this.flag = 1;
@@ -194,7 +181,8 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                             this.current_slide_speed = 0;
                         else {
                             this.body.velocity.x = this.current_slide_speed;
-                            var fade = this.scene.add.image(this.x, this.y, 'boss', this.anims.currentFrame.frame.name).setAlpha(0.5).setTint(0xff0000);
+                            var fade = this.scene.add.image(this.x, this.y, 'boss', this.anims.currentFrame.frame.name).setAlpha(0.5).setTint(0xff0000).setScale(2);
+                            var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
                             fade.flipX = this.flipX;
                             this.scene.tweens.add({ targets: fade, alpha: 0, ease: 'Power1', duration: 250, onComplete: () => { fade.destroy() } });
                         }
@@ -207,7 +195,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                 switch (this.flag) {
                     case 0:
                         this.scene.sound.play('snd_dead');
-                        this.anims.play('hero_defeat', true);
+                        this.anims.play('boss_defeat', true);
                         this.setVelocityX((this.flipX ? 1 : -1) * 125);
                         this.setVelocityY(-100);
                         this.flag = 1;
@@ -226,45 +214,28 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                 break;
 
             default:
-                
+                this.random = this.getRandomInt(3)
                 this.flag = 0;
                 if (this.body.onFloor()) {
-                    this.jump = 1;
-                    if (this.distance < 100 && !this.attack_cooldown) {
+                    if (this.distance < 50 && this.distance > -50 && !this.attack_cooldown) {
                         this.setVelocityX(0);
                         this.change_state("Attack");
                         // if (this.anims.getCurrentKey() != 'hero_idle2')
                         this.flag = -2;
                     }
-                    else if (this.distance > 200 && this.distance < 400 && !this.slide_cooldown) {
+                    else if (this.random == 1 && !this.slide_cooldown && this.distance < 100 && this.distance > -100) {
                         this.change_state("Slide");
                     }
-                    else if (this.distance < 10) {
+                    else if (this.distance < 10 && this.distance > -10) {
                         this.setVelocityY(-200);
-                        this.anims.play('hero_up', true);
+                        this.anims.play('boss_up', true);
                         // this.scene.sound.play('snd_jump', { rate: 2, volume: 0.6 });
                     }
-                    else if (this.direction != 0) {
-                        this.setVelocityX(this.direction * 75);
-                        this.anims.play('hero_walk', true);
-                        this.flipX = this.direction > 0;
-                    }
                     else {
-                        this.setVelocityX(0);
-                        if (!this.anims.isPlaying)
-                            this.anims.play('hero_idle', true);
-                    }
-                }
-                else {
-                    if (!this.attack_cooldown) {
-                        this.change_state("AttackAir");
-                    }
-                    else if (this.distance > 200) {
-                        this.setVelocityX(75);
+                        this.setVelocityX(this.direction * 75);
+                        this.anims.play('boss_walk', true);
                         this.flipX = this.direction < 0;
                     }
-                    else
-                        this.setVelocityX(0);
                 }
                 break;
         }
@@ -278,5 +249,8 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
             this.body.offset.y = 8;
         }
 
+    }
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
     }
 }

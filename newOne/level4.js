@@ -115,9 +115,9 @@ class Level4 extends Phaser.Scene {
 
         // boss moovements
         bosses.getChildren().forEach((enemy) => { 
+            enemy.distance = player.body.x - enemy.body.x;
+            enemy.direction = enemy.distance > 0 ? 1 : -1;
             enemy.update();
-            enemy.distance = Phaser.Math.Distance.BetweenPoints(player, enemy);
-            enemy.direction = enemy.distance < 0;
          });
     }
 }
