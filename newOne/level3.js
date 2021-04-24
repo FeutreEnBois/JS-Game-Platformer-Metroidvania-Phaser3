@@ -28,6 +28,7 @@ var Doors
 var endX;
 var endY;
 var Enemies;
+var EnemiesF;
 
 class Level3 extends Phaser.Scene {
     constructor() {
@@ -51,8 +52,8 @@ class Level3 extends Phaser.Scene {
         belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
         aboveLayer = map.createStaticLayer("sol", tileset, 0, 0)
         this.wallLayer = map.createStaticLayer("wall", tileset, 0,0)
-
-        belowLayer.setCollision([0, 5]);
+        
+        belowLayer.setCollision([0,5])
         this.walls = this.wallLayer.setCollisionByProperty({ collides: true});
         this.flames = this.deathLayer.setCollisionByProperty({ death: true});
         platforms = aboveLayer.setCollisionByProperty({ collides: true });
@@ -68,6 +69,7 @@ class Level3 extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
         Enemies = this.add.group();
+        EnemiesF = this.add.group();
         Doors = this.add.group(); 
         map.findObject('Objects', function(object){
             if (object.name === "finishPoint"){
@@ -82,7 +84,13 @@ class Level3 extends Phaser.Scene {
         })
 
         map.createFromObjects('goblin', "goblin", {}).forEach((object) => 
-	    	{ Enemies.add(new Goblin(this, object.x, object.y)); object.destroy(); });
+	    	{ Enemies.add(new Goblin(this, object.x, object.y));
+                object.destroy(); });
+
+        map.createFromObjects('bat', "bat", {}).forEach((object) => 
+	    	{ EnemiesF.add(new Bat(this, object.x, object.y));
+                object.destroy(); });
+            
 
         var end = this.add.rectangle(endX+8, endY, 16, 16, 0x5c5a5a, 128)
         this.physics.add.group(end);
@@ -95,10 +103,12 @@ class Level3 extends Phaser.Scene {
         // this.physics.add.overlap(this.player, this.Enemies, () => { this.player.player_get_hit() }, null, this);
         // this.physics.add.existing(player);
         this.physics.add.overlap(player, Enemies, () => { player.player_get_hit() }, null, this);
+        this.physics.add.overlap(player, EnemiesF, () => { player.player_get_hit() }, null, this);
         this.physics.add.collider(player, this.walls);
         this.physics.add.collider(player, this.flames, ()  =>{  player.player_get_hit() }, null, this);
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(platforms, Enemies);
+        this.physics.add.collider(platforms, EnemiesF);
         // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
         //set the keyboard input
@@ -172,6 +182,25 @@ class Level3 extends Phaser.Scene {
                 else if (player.x > enemy.x) {
                     enemy.body.velocity.x = 40;
                     enemy.shoot2D()
+                }
+            } else {
+                // enemy dont move
+                enemy.body.velocity.x = 0;
+            }
+        });
+
+        EnemiesF.getChildren().forEach((enemy) => { 
+            enemy.update(); 
+            var dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
+            if (dist < 200) {
+                // enemy go left(-) or right(+) if player is left or right of the enemy
+                if (player.x < enemy.x) {
+                    enemy.body.velocity.x = -40;
+                    enemy.shoot()
+                }
+                else if (player.x > enemy.x) {
+                    enemy.body.velocity.x = 40;
+                    enemy.shoot()
                 }
             } else {
                 // enemy dont move

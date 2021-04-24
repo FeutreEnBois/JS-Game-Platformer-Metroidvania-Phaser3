@@ -97,13 +97,17 @@ class Bat extends Phaser.Physics.Arcade.Sprite
     
     shoot() {
         let i = 1
-        let l = this.getRandomInt(100)
+        let l = this.getRandomInt(10000)
         if(i == l) {
             console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
             var bullet = bullets.create(this.body.x , this.body.y , 'bullet');
             bullet.setVelocity(0);
         }
     }
+        // get an ramdom number
+        getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
 }
 
 
