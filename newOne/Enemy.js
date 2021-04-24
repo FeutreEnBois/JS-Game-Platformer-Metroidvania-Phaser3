@@ -10,7 +10,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         this.flag = 0;
         this.state = "";
         this.setScale(0.5);
-        this.body.setSize(32, 45);
+        this.body.setSize(25, 38);
         // this.body.offset.y = -10;
     }
 
