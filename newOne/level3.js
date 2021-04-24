@@ -84,8 +84,8 @@ class Level3 extends Phaser.Scene {
 
         // create and config player
         player = new Player(this, 32, 32);
-        // this.physics.add.overlap(player, Enemies, () => { player.player_get_hit() }, null, this);
-        // this.physics.add.overlap(player, EnemiesF, () => { player.player_get_hit() }, null, this);
+        this.physics.add.overlap(player, Enemies, () => { player.player_get_hit() }, null, this);
+        this.physics.add.overlap(player, EnemiesF, () => { player.player_get_hit() }, null, this);
         this.physics.add.collider(player, this.walls);
         this.physics.add.collider(player, this.flames, ()  =>{  player.player_get_hit() }, null, this);
         this.physics.add.collider(player, platforms);
@@ -146,11 +146,11 @@ class Level3 extends Phaser.Scene {
                 // enemy go and shoot left(-) or right(+) if player is left or right of the enemy
                 if (player.x < enemy.x) {
                     enemy.body.velocity.x = -40;
-                    // enemy.shoot2G()
+                    enemy.shoot2G()
                 }
                 else if (player.x > enemy.x) {
                     enemy.body.velocity.x = 40;
-                    // enemy.shoot2D()
+                    enemy.shoot2D()
                 }
             } else {
                 // enemy dont move
@@ -165,11 +165,11 @@ class Level3 extends Phaser.Scene {
                 // enemy go and drop left(-) or right(+) if player is left or right of the enemy
                 if (player.x < enemy.x) {
                     enemy.body.velocity.x = -40;
-                    // enemy.shoot()
+                    enemy.shoot()
                 }
                 else if (player.x > enemy.x) {
                     enemy.body.velocity.x = 40;
-                    // enemy.shoot()
+                    enemy.shoot()
                 }
             } else {
                 // enemy dont move

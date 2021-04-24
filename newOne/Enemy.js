@@ -36,7 +36,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         let l = this.getRandomInt(200)
         if(i == l) {
             console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
-            var bullet = bullets.create(this.body.x , this.body.y+10 , 'bullet');
+            var bullet = bullets.create(this.body.x , this.body.y+13 , 'bullet');
             bullet.setScale(0.7)
             bullet.setVelocityX(-200);
             bullet.body.allowGravity = false;
@@ -49,7 +49,7 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         let l = this.getRandomInt(200)
         if(i == l) {
             console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
-            var bullet = bullets.create(this.body.x , this.body.y +10, 'bullet');
+            var bullet = bullets.create(this.body.x , this.body.y +13, 'bullet');
             bullet.setVelocityX(200);
             bullet.setScale(0.7)
             bullet.body.allowGravity = false;
