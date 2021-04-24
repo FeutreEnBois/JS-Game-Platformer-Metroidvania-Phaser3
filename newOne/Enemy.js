@@ -38,10 +38,11 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
     //shoot a bullet to left
     shoot2G() {
         let i = 1
-        let l = this.getRandomInt(150)
+        let l = this.getRandomInt(200)
         if(i == l) {
             console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
             var bullet = bullets.create(this.body.x , this.body.y+10 , 'bullet');
+            bullet.setScale(0.7)
             bullet.setVelocityX(-200);
             bullet.body.allowGravity = false;
         }
@@ -50,11 +51,12 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
     //shoot a bullet to right
     shoot2D() {
         let i = 1
-        let l = this.getRandomInt(150)
+        let l = this.getRandomInt(200)
         if(i == l) {
             console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
             var bullet = bullets.create(this.body.x , this.body.y +10, 'bullet');
             bullet.setVelocityX(200);
+            bullet.setScale(0.7)
             bullet.body.allowGravity = false;
         }
     
@@ -97,11 +99,12 @@ class Bat extends Phaser.Physics.Arcade.Sprite
     
     shoot() {
         let i = 1
-        let l = this.getRandomInt(10000)
+        let l = this.getRandomInt(200)
         if(i == l) {
             console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
             var bullet = bullets.create(this.body.x , this.body.y , 'bullet');
             bullet.setVelocity(0);
+            bullet.setScale(0.7)
         }
     }
         // get an ramdom number
