@@ -48,14 +48,6 @@ class Player extends Phaser.Physics.Arcade.Sprite
     {
         if(this.hurt <= 0)
             this.alpha = 1;
-        if(!this.death)
-        {
-            if(this.y > this.scene.physics.world.bounds.height)
-                this.change_state("DeathSpike");
-                
-            /*else if(this.keySpace.isDown)
-                this.change_state("Death");*/
-        }
         
         getKeyState(this.Z);
         getKeyState(this.X);

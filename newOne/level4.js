@@ -1,6 +1,6 @@
 
 //retart current scene if player get touch by an enemy
-function hitEnemy(player, enemy1 , enemy2) {
+function hitEnemy(player, boss , enemy2) {
     // player.body.setTint(0xff0000);
     // player.anims.play('death');
     this.scene.restart();
@@ -29,12 +29,13 @@ var delay = 0;
 var cooldownDash = false;
 var volume = 0.4;
 var controls;
-var enemy1;
+var boss;
 var enemy2;
 var enemy3;
 var Doors
 var endX;
 var endY;
+var bosses;
 
 class Level4 extends Phaser.Scene {
     constructor() {
@@ -103,26 +104,21 @@ class Level4 extends Phaser.Scene {
         player.body.setCollideWorldBounds(true);
 
         //set the keyboard input
-        keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
         keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
-        keyZ.on('down', function () { //up
-            if (player.body.blocked.down) {
-                player.body.setVelocityY(-200);
-            }
-        }, this);
-
+ 
+        bosses = this.add.group()
         //create some enemy
-        enemy1 = this.add.sprite(435, 120, 'boss');
-        enemy1.setScale(3)
-        enemy1.flipX = 1;
-        this.physics.add.group(enemy1);
-        this.physics.add.collider(enemy1, platforms);
-        this.physics.add.collider(enemy1, player, hitEnemy, null, this);
+        this.boss = new Boss(this,435,120)
+        bosses.add(this.boss)
+        // boss = this.add.sprite(435, 120, 'boss');
+        // boss.setScale(3)
+        // boss.flipX = 1;
+        // this.physics.add.group(boss);
+        this.physics.add.overlap(this.boss.player_attack, player, (object, attack) => { this.boss.attack_hit(attack, object) }, null, this);
+        this.physics.add.collider(bosses, platforms);
+        // this.physics.add.overlap(bosses, player, () => { player.player_get_hit()}, null, this);
 
 
 
@@ -161,50 +157,25 @@ class Level4 extends Phaser.Scene {
     
         // Player moovements
         player.update()
-        // else if (keyQ.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(-1000)
-        //     // speedBoostG()
-        // } else if (keyD.isDown && cursors.space.isDown && cooldownDash != true) {
-        //     // speedBoostD()
-        //     dash -= 1;
-        //     if (dash == 0){
-        //         delay = 0
-        //         cooldownDash = true;
-        //     }
-        //     player.body.setVelocityX(1000)
-        // }       // Idle
-    
-        // else if (keyQ.isDown) {
-        //     player.body.setVelocityX(-80);
-    
-        //     // player.anims.play('left', true);
-        // }
-        // // moove right
-        // else if (keyD.isDown) {
-        //     player.body.setVelocityX(80);
-    
-        //     // player.anims.play('right', true);
-    
-        // } else {
-        //     player.body.setVelocityX(0);
-    
-        //     // player.anims.play('turn');
-        // }
-    
-        if (keyZ.isDown) {
-            console.log('Z key pressed')
-        } else if (keyS.isDown) {
-            console.log('S key pressed')
-        } else if (keyD.isDown) {
-            console.log('D key pressed')
-        } else if (keyQ.isDown) {
-            console.log('Q key pressed')
-        }
+        bosses.getChildren().forEach((enemy) => { 
+            enemy.update();
+            
+            enemy.distance = Phaser.Math.Distance.BetweenPoints(player, enemy);
+            enemy.direction = enemy.distance < 0;
+            // if (distance < 200) {
+            //     // enemy go left(-) or right(+) if player is left or right of the enemy
+            //     if (player.x < enemy.x) {
+            //         enemy.body.velocity.x = -40;
+            //     }
+            //     else if (player.x > enemy.x) {
+            //         enemy.body.velocity.x = 40;
+            //     }
+            // } else {
+            //     // enemy dont move
+            //     enemy.body.velocity.x = 0;
+            // }
+         });
+
         // // Jump
         // if (cursors.up.isDown && player.body.touching.down) // && player.body.touching.down
         // {

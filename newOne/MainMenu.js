@@ -18,7 +18,7 @@ class MainMenu extends Phaser.Scene
         Nom.setScale(0.3)
         Button.on('pointerover', () => Button.setTint(0xffd700));
         Button.on('pointerout', () => Button.setTint(0xffffff));
-        Button.on('pointerdown', () => this.scene.start("Level2"));
+        Button.on('pointerdown', () => this.scene.start("Level1"));
     }
     transitioning(transition_to)
     {
