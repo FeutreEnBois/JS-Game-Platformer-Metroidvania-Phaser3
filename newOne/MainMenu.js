@@ -5,8 +5,6 @@ class MainMenu extends Phaser.Scene
     constructor()
     {
         super({ key: "MainMenu"});
-        // this.Controls = false;
-        // this.state = "";
     }
     create(){
         this.add.image(400,300, "background");
