@@ -259,8 +259,19 @@
                  "visible":true,
                  "width":0,
                  "x":236,
-                 "y":95
+                 "y":70
                 }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":600,
+                 "y":50
+              },
                 {
                  "height":0,
                  "id":21,
