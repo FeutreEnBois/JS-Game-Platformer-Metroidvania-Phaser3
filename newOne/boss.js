@@ -145,7 +145,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                             // this.scene.sound.play('snd_sword_slash', { rate: 0.8 });
                             this.anims.play('boss_attack_3_2', true);
                             this.setVelocityX(0);
-                            var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
+                            var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y+20, "", "", false).setScale(2);
                             this.scene.time.addEvent({ delay: 100, callback: () => { attack_box.destroy() } });
                             this.flag = 2;
                         }
@@ -171,6 +171,8 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                         this.scene.tweens.add({ targets: this, current_slide_speed: 0, ease: 'Linear', duration: this.anims.duration });
                         this.flag = 1;
                         this.slide_cooldown = 1;
+                        var attack_box = this.player_attack.create(this.x + 30 * this.direction + (this.flipX ? -20 : 20), this.y + 30, "", "", false);
+                        this.scene.time.addEvent({ delay: 50, callback: () => { attack_box.destroy() } });
                         this.scene.time.addEvent({ delay: 1500, callback: () => { this.slide_cooldown = 0; } });
                         break;
 
@@ -181,8 +183,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                             this.current_slide_speed = 0;
                         else {
                             this.body.velocity.x = this.current_slide_speed;
-                            var fade = this.scene.add.image(this.x, this.y, 'boss', this.anims.currentFrame.frame.name).setAlpha(0.5).setTint(0xff0000).setScale(2);
-                            var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
+                            var fade = this.scene.add.image(this.x, this.y, 'boss', this.anims.currentFrame.frame.name).setAlpha(0.5).setTint(0xff0000).setScale(3);
                             fade.flipX = this.flipX;
                             this.scene.tweens.add({ targets: fade, alpha: 0, ease: 'Power1', duration: 250, onComplete: () => { fade.destroy() } });
                         }
