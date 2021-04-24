@@ -73,7 +73,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         this.scene.tweens.add({ targets: this, current_slide_speed: 0, ease: 'Linear', duration: this.anims.duration});
                         this.flag = 1;
                         this.slide_cooldown = 1;
-                        this.scene.time.addEvent({ delay: 1500, callback: () => { this.slide_cooldown = 0; } });
+                        this.scene.time.addEvent({ delay: 500, callback: () => { this.slide_cooldown = 0; } });
                         break;
 
                     case 1:
