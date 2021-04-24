@@ -14,7 +14,6 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         this.hurt = 0;
         this.flag = 0;
         this.state = "";
-        this.flipX = Phaser.Math.Between(0, 1);
         this.setScale(0.5);
         this.body.setSize(32, 45);
         // this.body.offset.y = -10;
@@ -25,30 +24,24 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
         switch(this.state)
         {
             default:
-                if (!this.anims.isPlaying){
+                if (this.body.velocity.x < 0){
                     this.anims.play('left',true);
+                } else if (this.body.velocity.x > 0){
+                    this.anims.play('right',true);
                 }
                 break;
         }
     }
 
-    shoot() {
-        let i = 1
-        let l = this.getRandomInt(100)
-        if(i == l) {
-            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-            var bullet = bullets.create(this.body.x + 5, this.body.y +5, 'bullet');
-            bullet.setVelocity(0);
-        }
-    }
+
     
     //shoot a bullet to left
     shoot2G() {
         let i = 1
-        let l = this.getRandomInt(80)
+        let l = this.getRandomInt(150)
         if(i == l) {
             console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
-            var bullet = bullets.create(this.body.x + 5, this.body.y +5, 'bullet');
+            var bullet = bullets.create(this.body.x , this.body.y+10 , 'bullet');
             bullet.setVelocityX(-200);
             bullet.body.allowGravity = false;
         }
@@ -57,10 +50,10 @@ class Goblin extends Phaser.Physics.Arcade.Sprite
     //shoot a bullet to right
     shoot2D() {
         let i = 1
-        let l = this.getRandomInt(80)
+        let l = this.getRandomInt(150)
         if(i == l) {
             console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
-            var bullet = bullets.create(this.body.x + 5, this.body.y +5, 'bullet');
+            var bullet = bullets.create(this.body.x , this.body.y +10, 'bullet');
             bullet.setVelocityX(200);
             bullet.body.allowGravity = false;
         }
@@ -77,26 +70,38 @@ class Bat extends Phaser.Physics.Arcade.Sprite
 {
     constructor(scene, x, y)
     {
-        super(scene, x, y, 'dude');
+        super(scene,x,y,'dude');
         scene.add.existing(this);
         scene.physics.world.enable(this);
         this.HP = 1;
         this.hurt = 0;
         this.flag = 0;
         this.state = "";
-        this.speed = Phaser.Math.Between(0, 1) == 0 ? 25 : -25;
-        this.body.setSize(24, 24);
-        this.body.setAllowGravity(false);
-        this.setCollideWorldBounds(true);
-        this.anims.play('left');
-        this.body.velocity.y = this.speed;
+        this.setScale(0.5);
+        this.body.setSize(32, 45);
+        this.body.allowGravity = false;
     }
-    update()
-    {
-        if (this.body.velocity === 0)
+        update()
         {
-            this.speed = -this.speed;
-            this.body.velocity.y = this.speed;
+            switch(this.state)
+            {
+                default:
+                    if (this.body.velocity.x < 0){
+                        this.anims.play('left',true);
+                    } else if (this.body.velocity.x > 0){
+                        this.anims.play('right',true);
+                    }
+                    break;
+            }
+        }
+    
+    shoot() {
+        let i = 1
+        let l = this.getRandomInt(100)
+        if(i == l) {
+            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+            var bullet = bullets.create(this.body.x , this.body.y , 'bullet');
+            bullet.setVelocity(0);
         }
     }
 }

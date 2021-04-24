@@ -1,12 +1,3 @@
-
-//retart current scene if player get touch by an enemy
-function hitEnemy(player, enemy1 , enemy2) {
-    // player.body.setTint(0xff0000);
-    // player.anims.play('death');
-    this.scene.restart();
-    gameOver = true;
-}
-
 var worldLayer;
 var belowLayer;
 var aboveLayer;
@@ -125,26 +116,14 @@ class Level3 extends Phaser.Scene {
         }, this);
         
         
-        //create some enemy
-        enemy1 = this.add.rectangle(300, 120, 10, 16, 0xff0000);
-        this.physics.add.group(enemy1);
-        this.physics.add.collider(enemy1, platforms);
-        this.physics.add.collider(enemy1, player, hitEnemy, null, this);
 
-        enemy2 = this.add.rectangle(700, 40, 16, 10, 0xff0000);
-        this.physics.add.group(enemy2);
-        this.physics.add.collider(enemy2, platforms);
-        this.physics.add.collider(enemy2, player, hitEnemy, null, this);
-        enemy2.body.allowGravity = false;
-
-        enemy3 = this.add.rectangle(450, 120, 18, 16, 0xff0000);
-        this.physics.add.group(enemy3);
-        this.physics.add.collider(enemy3, platforms);
-        this.physics.add.collider(enemy3, player, hitEnemy, null, this);
 
 
         this.physics.add.collider(end, platforms);
         this.physics.add.collider(end, player, () => this.scene.start("Level4"));
+
+        bullets = this.physics.add.group();
+        this.physics.add.overlap(player, bullets, () => { player.player_get_hit() }, null, this);
 
         // set a following player camera
         this.cameras.main.setBounds(0, 0, worldLayer.displayWidth, worldLayer.displayHeight);
@@ -181,7 +160,24 @@ class Level3 extends Phaser.Scene {
     
         // Player moovements
         player.update()
-        Enemies.getChildren().forEach((enemy) => { enemy.update(); });
+        Enemies.getChildren().forEach((enemy) => { 
+            enemy.update(); 
+            var dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
+            if (dist < 200) {
+                // enemy go left(-) or right(+) if player is left or right of the enemy
+                if (player.x < enemy.x) {
+                    enemy.body.velocity.x = -40;
+                    enemy.shoot2G()
+                }
+                else if (player.x > enemy.x) {
+                    enemy.body.velocity.x = 40;
+                    enemy.shoot2D()
+                }
+            } else {
+                // enemy dont move
+                enemy.body.velocity.x = 0;
+            }
+        });
         if (keyZ.isDown) {
             console.log('Z key pressed')
         } else if (keyS.isDown) {

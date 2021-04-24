@@ -11,23 +11,7 @@
 // }
 
 
-//restart current scene when you get touch by an enemy
-function hitEnemy(player, enemy1, enemy2) { 
-    // player.body.setTint(0xff0000);
-    // player.anims.play('death');
-    music.stop();
-    this.scene.restart();
-    gameOver = true;
-}
 
-//restart current scene when you get touch by an bullet
-function hitBullet(player, bullets) {
-    // player.body.setTint(0xff0000);
-    // player.anims.play('death');
-    music.stop();
-    this.scene.restart();
-    gameOver = true;
-}
 
 
 var worldLayer;
@@ -152,39 +136,13 @@ class Level1 extends Phaser.Scene {
             }
         }, this);
 
-        //create some enemy
-        enemy1 = this.add.rectangle(450, 120, 10, 16, 0xff0000);
-        this.physics.add.group(enemy1);
-        this.physics.add.collider(enemy1, platforms);
-        this.physics.add.collider(enemy1, player, hitEnemy, null, this);
 
-        enemy2 = this.add.rectangle(700, 75, 16, 10, 0xff0000);
-        this.physics.add.group(enemy2);
-        this.physics.add.collider(enemy2, platforms);
-        this.physics.add.collider(enemy2, player, hitEnemy, null, this);
-        enemy2.body.allowGravity = false;
-
-        enemy3 = this.add.rectangle(300, 120, 18, 20, 0xff0000);
-        this.physics.add.group(enemy3);
-        this.physics.add.collider(enemy3, platforms);
-        this.physics.add.collider(enemy3, player, hitEnemy, null, this);
-
-        enemy4 = this.add.rectangle(400, 120, 18, 20, 0xff0000);
-        this.physics.add.group(enemy4);
-        this.physics.add.collider(enemy4, platforms);
-        this.physics.add.collider(enemy4, player, hitEnemy, null, this);
-
-
-        enemy1.body.setCollideWorldBounds(true);
-        enemy2.body.setCollideWorldBounds(true);
-        enemy3.body.setCollideWorldBounds(true);
-        enemy4.body.setCollideWorldBounds(true);
 
         this.physics.add.collider(end, platforms);
-        this.physics.add.collider(end, player, () => this.scene.start("Level2"));
+        this.physics.add.collider(end, player, () => this.scene.start("Level3"));
 
         bullets = this.physics.add.group();
-        this.physics.add.collider(player, bullets, hitBullet, null, this);
+        this.physics.add.overlap(player, bullets, () => { player.player_get_hit() }, null, this);
     }
 
     update() {
@@ -261,8 +219,6 @@ class Level1 extends Phaser.Scene {
 
         // distance (on pixel) between player and each enemy 
         
-        var dist2 = Phaser.Math.Distance.BetweenPoints(player, enemy3);
-        var dist3 = Phaser.Math.Distance.BetweenPoints(player, enemy4);
 
         
     }

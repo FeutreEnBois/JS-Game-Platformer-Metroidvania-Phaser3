@@ -52,6 +52,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         {
             if(this.y > this.scene.physics.world.bounds.height)
                 this.change_state("DeathSpike");
+                
             /*else if(this.keySpace.isDown)
                 this.change_state("Death");*/
         }

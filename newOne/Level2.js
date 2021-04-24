@@ -22,6 +22,9 @@ function hitEnemy(player, enemy1 , enemy2) {
 var worldLayer;
 var belowLayer;
 var aboveLayer;
+var aaa;
+var bbb;
+var ccc;
 var player;
 var cursors;
 var playerSpeed = 150;
@@ -62,15 +65,17 @@ class Level2 extends Phaser.Scene {
 
     create() {
 
-        const map = this.make.tilemap({ key: "lvl" });
+        const map = this.make.tilemap({ key: "lvl2" });
 
         let tileset = map.addTilesetImage("oubliette_tileset", "tileset");
         this.deathLayer = map.createStaticLayer("death", tileset, 0,0)
         worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
-        belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
-        aboveLayer = map.createStaticLayer("sol", tileset, 0, 0)
+        belowLayer = map.createStaticLayer("Fond", tileset, 0, 0)
+        aboveLayer = map.createStaticLayer("Sol", tileset, 0, 0)
+        aaa = map.createStaticLayer("Wall", tileset, 0, 0)
+        bbb = map.createStaticLayer("Outside", tileset, 0, 0)
+        ccc = map.createStaticLayer("Death", tileset, 0, 0)
 
-        belowLayer.setCollision([0, 5]);
         this.flames = this.deathLayer.setCollisionByProperty({ death: true});
         platforms = aboveLayer.setCollisionByProperty({ collides: true });
         // Help text that has a "fixed" position on the screen
