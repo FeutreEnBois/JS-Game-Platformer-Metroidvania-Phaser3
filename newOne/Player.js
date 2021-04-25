@@ -59,7 +59,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('hero_slide', true);
                         this.current_slide_speed = this.flipX ? -200 : 200;
                         this.setVelocityX(this.current_slide_speed)
@@ -90,7 +90,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('hero_boost', true);
                         this.setVelocityY(-200)
                         this.flag = 1;
@@ -116,7 +116,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 switch(this.flag)
                 {
                     case 0:
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('hero_defeat', true);
                         this.setVelocityX((this.flipX ? 1 : -1)*125);
                         this.setVelocityY(-100);
@@ -149,7 +149,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     else if (this.Z.isPressed)
                     {
                         this.setVelocityY(-200);
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('hero_up', true);
                     }
 
