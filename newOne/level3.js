@@ -83,7 +83,7 @@ class Level3 extends Phaser.Scene {
                 object.destroy(); });
 
         // create and config player
-        player = new Player(this, 32, 32);
+        player = new Player(this, 32, 150);
         this.physics.add.overlap(player, Enemies, () => { player.player_get_hit() }, null, this);
         this.physics.add.overlap(player, EnemiesF, () => { player.player_get_hit() }, null, this);
         this.physics.add.collider(player, this.walls);
