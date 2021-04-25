@@ -1,5 +1,6 @@
 var bullets
 
+
 class Level3 extends Phaser.Scene {
     constructor() {
         super({ key: "Level3" });
@@ -14,7 +15,7 @@ class Level3 extends Phaser.Scene {
 
         // get map
         const map = this.make.tilemap({ key: "lvl3" });
-        let tileset = map.addTilesetImage("oubliette", "tileset");
+        const tileset = map.addTilesetImage("oubliette", "tileset");
         this.deathLayer = map.createStaticLayer("death", tileset, 0,0)
         this.worldLayer = map.createStaticLayer("Background", tileset, 0, 0)
         this.belowLayer = map.createStaticLayer("fond", tileset, 0, 0)
@@ -22,7 +23,7 @@ class Level3 extends Phaser.Scene {
         this.wallLayer = map.createStaticLayer("wall", tileset, 0,0)
      
         // set collides
-        this.belowLayer.setCollision([0,5])
+        this.belowLayer.setCollision([0,5]);
         this.walls = this.wallLayer.setCollisionByProperty({ collides: true});
         this.flames = this.deathLayer.setCollisionByProperty({ death: true});
         this.platforms = this.aboveLayer.setCollisionByProperty({ collides: true });
@@ -83,30 +84,29 @@ class Level3 extends Phaser.Scene {
     }
 
     update() {
-        
-        // P for pause
+
+        // P for pause the physics
         if (this.keyP.isDown) {
             this.physics.pause();
-            this.music.pause();
-        } 
-        // O for resume
-        else if (this.keyO.isDown){
+        }
+
+        // O for resume the physics
+        else if (this.keyO.isDown) {
             this.physics.resume();
-            this.music.resume();
         }
-        // // I for restart current scene
-        else if (this.keyI.isDown){
-            // music.stop();
-            this.scene.restart();
-    
+        
+        // I for restart current scene
+        else if (this.keyI.isDown) {
+            this.scene.restart(); 
+
         }
-    
+
         // player moovements
         this.player.update()
 
         // enemy moovements
         this.Enemies.getChildren().forEach((enemy) => { 
-            enemy.update(); 
+            enemy.update();
             var dist = Phaser.Math.Distance.BetweenPoints(this.player, enemy);
             if (dist < 200) {
                 // enemy go and shoot left(-) or right(+) if player is left or right of the enemy
@@ -122,25 +122,6 @@ class Level3 extends Phaser.Scene {
                 // enemy dont move
                 enemy.body.velocity.x = 0;
             }
-        });
-
-        this.EnemiesF.getChildren().forEach((enemy) => { 
-            enemy.update(); 
-            var dist = Phaser.Math.Distance.BetweenPoints(this.player,enemy);
-            if (dist < 200) {
-                // enemy go and drop left(-) or right(+) if player is left or right of the enemy
-                if (this.player.x < enemy.x) {
-                    enemy.body.velocity.x = -40;
-                    enemy.shoot()
-                }
-                else if (this.player.x > enemy.x) {
-                    enemy.body.velocity.x = 40;
-                    enemy.shoot()
-                }
-            } else {
-                // enemy dont move
-                enemy.body.velocity.x = 0;
-            }
-        });
+         });
     }
 }
