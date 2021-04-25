@@ -62,9 +62,8 @@ class Level3 extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platforms);
         this.physics.add.collider(this.platforms, this.Enemies);
         this.physics.add.collider(this.platforms, this.EnemiesF);
-        // player = this.physics.add.sprite(25, 25, 'assets/sprite/dude').setScale(0.5)
 
-        //set the keyboard input
+        // set the keyboard input
         this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         this.keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
         this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
