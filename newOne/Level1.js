@@ -1,37 +1,6 @@
-// var worldLayer;
-// var belowLayer;
-// var aboveLayer;
-// var deathLayer;
-// var player;
-// var cursors;
-// var playerSpeed = 150;
-// var jumpTimer = 0;
-// // var platforms;
-// // var keyZ;
-// // var keyQ;
-// // var keyS;
-// // var keyD;
-// // var keyP;
-// // var keyO;
-// // var keyI;
-// // var nbrDash = 2;
-// // var dash = 4;
-// // var delayBTWDash = 60;
-// // var delay = 0;
-// // var cooldownDash = false;
-// // var volume = 0.4;
-// // var music;
-// // var controls;
-// // var enemy1;
-// // var enemy2;
-// // var enemy3;
-// // var enemy4;
-// // var goblin;
-// // var Doors
-// // var endX;
-// // var endY;
 var bullets;
-// var Enemies;
+var endX;
+var endY;
 
 class Level1 extends Phaser.Scene {
     constructor() {

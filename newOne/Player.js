@@ -94,13 +94,6 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         this.anims.play('hero_boost', true);
                         this.setVelocityY(-200)
                         this.flag = 1;
-                        var effect = this.scene.add.sprite(this.x, this.y, 'fx_ring');
-                        effect.on('animationcomplete', () => { effect.destroy() });
-                        effect.anims.play("fx_ring");
-                        effect.setAngle(this.body.velocity.x == 0 ? 0 : (this.flipX ? -30 : 30));
-                        effect.setScale(0.5);
-                        effect.setTint(0xff0000);
-                        this.scene.tweens.add({ targets: effect, alpha: 0, ease: 'Power1', duration: 250,  }); // duration: 250,
                         break;
 
                     case 1:

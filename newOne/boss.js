@@ -45,8 +45,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        // console.log(this.direction)
-        // console.log(this.distance)
+
         if (this.hurt <= 0)
             this.alpha = 1;
 

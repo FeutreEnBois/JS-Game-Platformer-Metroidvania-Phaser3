@@ -1,33 +1,3 @@
-// var worldLayer;
-// var belowLayer;
-// var aboveLayer;
-// var player;
-// var cursors;
-// var playerSpeed = 150;
-// var jumpTimer = 0;
-// var platforms;
-// var keyZ;
-// var keyQ;
-// var keyS;
-// var keyD;
-// var keyP;
-// var keyO;
-// var keyI;
-// var nbrDash = 2;
-// var dash = 4;
-// var delayBTWDash = 60;
-// var delay = 0;
-// var cooldownDash = false;
-// var volume = 0.4;
-// var controls;
-// var boss;
-// var enemy2;
-// var enemy3;
-// var Doors
-// var endX;
-// var endY;
-// var bosses;
-
 class Level4 extends Phaser.Scene {
     constructor() {
         super({ key: "Level4" });

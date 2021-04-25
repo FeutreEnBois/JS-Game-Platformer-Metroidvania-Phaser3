@@ -66,7 +66,6 @@ class Preloader extends Phaser.Scene {
         this.anims.create({ key: 'boss_attack_2_2', frames: this.anims.generateFrameNumbers('boss', { start: 50, end: 52 }), frameRate: 15, });
         this.anims.create({ key: 'boss_attack_3_1', frames: this.anims.generateFrameNumbers('boss', { start: 53, end: 54 }), frameRate: 10, });
         this.anims.create({ key: 'boss_attack_3_2', frames: this.anims.generateFrameNumbers('boss', { start: 55, end: 58 }), frameRate: 15, });
-        this.anims.create({ key: 'boss_attack_air', frames: this.anims.generateFrameNumbers('boss', { start: 96, end: 99 }), frameRate: 12, });
         this.anims.create({ key: 'boss_slide', frames: this.anims.generateFrameNumbers('boss', { start: 24, end: 28 }), duration: 800, });
         this.anims.create({ key: 'boss_hurt', frames: this.anims.generateFrameNumbers('boss', { start: 59, end: 61 }), frameRate: 5, });
         this.anims.create({ key: 'boss_defeat', frames: this.anims.generateFrameNumbers('boss', { start: 62, end: 68 }), frameRate: 8, });
@@ -96,6 +95,6 @@ class Preloader extends Phaser.Scene {
         // EFFECT
         this.anims.create({ key: 'thunder', frames: this.anims.generateFrameNumbers('Thunder', { start: 0, end: 6 }), repeat : 2, frameRate: 10, });
 
-        this.scene.start('Level4');
+        this.scene.start('MainMenu');
     };
 }

@@ -8,10 +8,10 @@ class MainMenu extends Phaser.Scene
     }
     create(){
         this.sound.stopAll();
-        music = this.sound.add('omen');
-        music.setVolume(0.8);
-        music.setLoop(true);
-        music.play();
+        this.music = this.sound.add('omen');
+        this.music.setVolume(0.8);
+        this.music.setLoop(true);
+        this.music.play();
 
         this.add.image(400,300, "background");
         Nom = this.add.image(253,50, "Nom");
