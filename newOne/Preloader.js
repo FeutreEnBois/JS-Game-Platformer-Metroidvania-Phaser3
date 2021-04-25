@@ -15,8 +15,6 @@ class Preloader extends Phaser.Scene {
         this.load.spritesheet('boss', 'assets/Monsters_Creatures_Fantasy/boss/adventurer.png', { frameWidth: 50, frameHeight: 37 });
         this.load.spritesheet('Thunder', 'assets/Monsters_Creatures_Fantasy/boss/attack-effect/Thunder.png', { frameWidth: 32, frameHeight: 100});
 
-        this.load.spritesheet('goblin', 'assets/Monsters_Creatures_Fantasy/Idle', { frameWidth: 150, frameHeight: 150 });
-
         // Load all assets
         this.load.image("bullet", "assets/Monsters_Creatures_Fantasy/effect/bullet.png");
         this.load.image("tileset", "assets/lvl/oubliette_tileset.png");
