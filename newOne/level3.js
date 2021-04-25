@@ -122,6 +122,24 @@ class Level3 extends Phaser.Scene {
                 // enemy dont move
                 enemy.body.velocity.x = 0;
             }
-         });
+        });
+        this.EnemiesF.getChildren().forEach((enemy) => { 
+            enemy.update();
+            var dist = Phaser.Math.Distance.BetweenPoints(this.player, enemy);
+            if (dist < 200) {
+                // enemy go and shoot left(-) or right(+) if player is left or right of the enemy
+                if (this.player.x < enemy.x) {
+                    enemy.body.velocity.x = -40;
+                    enemy.shoot()
+                }
+                else if (this.player.x > enemy.x) {
+                    enemy.body.velocity.x = 40;
+                    enemy.shoot()
+                }
+            } else {
+                // enemy dont move
+                enemy.body.velocity.x = 0;
+            }
+        });
     }
 }
