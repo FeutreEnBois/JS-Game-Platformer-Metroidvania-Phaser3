@@ -43,7 +43,7 @@ class Level4 extends Phaser.Scene {
         // config music
         this.sound.stopAll();
         this.music = this.sound.add('bossMusic');
-        this.music.setVolume(0.4);
+        this.music.setVolume(0.6);
         this.music.setLoop(true);
         this.music.play();
         const map = this.make.tilemap({ key: "lvl4" });

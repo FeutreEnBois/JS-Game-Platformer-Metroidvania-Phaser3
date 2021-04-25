@@ -54,7 +54,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                 switch (this.flag) {
                     case -2:
                         this.setVelocityX(0);
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('boss_unsealth_sword', true);
                         this.flag = -1;
                         break;
@@ -74,7 +74,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     case 1:
                         if (!this.anims.isPlaying) {
                             // this.scene.sound.play('snd_sword_slash');
-                            this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                            // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                             this.anims.play('boss_attack_1_2', true);
                             this.flag = 2;
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -40 : 40), this.y, "", "", false);
@@ -92,7 +92,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                                 this.change_state("");
                                 this.attack_cooldown = 1;
                                 this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; } });
-                                this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                                // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                                 this.anims.play('boss_idle2', true);
                             }
                         }
@@ -104,7 +104,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                 switch (this.flag) {
                     case 0:
                         this.setVelocityX(0);
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('boss_attack_2_1', true);
                         this.combo = 0;
                         this.flag = 1;
@@ -113,7 +113,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     case 1:
                         if (!this.anims.isPlaying) {
                             // this.scene.sound.play('snd_sword_slash');
-                            this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                            // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                             this.anims.play('boss_attack_2_2', true);
                             this.flag = 2;
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
@@ -131,7 +131,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                                 this.change_state("");
                                 this.attack_cooldown = 1;
                                 this.scene.time.addEvent({ delay: 500, callback: () => { this.attack_cooldown = 0; } });
-                                this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                                // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                                 this.anims.play('boss_idle2', true);
                             }
                         }
@@ -150,7 +150,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     case 1:
                         if (!this.anims.isPlaying) {
                             // this.scene.sound.play('snd_sword_slash', { rate: 0.8 });
-                            this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                            // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                             this.anims.play('boss_attack_3_2', true);
                             this.setVelocityX(0);
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y + 20, "", "", false).setScale(2);
@@ -164,7 +164,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                             this.change_state("");
                             this.attack_cooldown = 1;
                             this.scene.time.addEvent({ delay: 1500, callback: () => { this.attack_cooldown = 0; } });
-                            this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                            // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                             this.anims.play('boss_idle2', true);
                         }
                         break;
@@ -174,7 +174,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                 switch (this.flag) {
                     case 0:
                         // this.scene.sound.play('snd_slide', { rate: 1.5, volume: 0.8 });
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('boss_slide', true);
                         this.current_slide_speed = this.flipX ? -200 : 200;
                         this.setVelocityX(this.current_slide_speed)
@@ -203,7 +203,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
             case "Thunder":
                 switch (this.flag) {
                     case 0:
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play("pre-thunder", true);
                         this.flag = 1;
                         this.thunder_cooldown = 1;
@@ -245,7 +245,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     this.body.velocity.x *= 0.9;
                 switch (this.flag) {
                     case 0:
-                        this.scene.sound.play('snd_dead');
+                        // this.scene.sound.play('snd_dead');
                         this.anims.play('boss_defeat', true);
                         this.setVelocityX((this.flipX ? 1 : -1) * 125);
                         this.setVelocityY(-100);
@@ -279,7 +279,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     }
                     else if (this.distance < 10 && this.distance > -10) {
                         this.setVelocityY(-200);
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('boss_up', true);
                         // this.scene.sound.play('snd_jump', { rate: 2, volume: 0.6 });
                     }
@@ -289,7 +289,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                     }
                     else {
                         this.setVelocityX(this.direction * 75);
-                        this.scene.sound.play('####', { rate: 2, volume: 0.6 });
+                        // this.scene.sound.play('####', { rate: 2, volume: 0.6 });
                         this.anims.play('boss_walk', true);
                         this.flipX = this.direction < 0;
                     }
