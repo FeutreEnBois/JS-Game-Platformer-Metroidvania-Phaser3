@@ -13,6 +13,7 @@ class Preloader extends Phaser.Scene {
         this.load.spritesheet('hero', 'assets/hero/adventurer/adventurer.png', { frameWidth: 50, frameHeight: 37 });
         this.load.spritesheet('dude', 'assets/hero/adventurer/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('boss', 'assets/Monsters_Creatures_Fantasy/boss/adventurer.png', { frameWidth: 50, frameHeight: 37 });
+        this.load.spritesheet('Thunder', 'assets/Monsters_Creatures_Fantasy/boss/attack-effect/Thunder.png', { frameWidth: 32, frameHeight: 100});
 
         this.load.spritesheet('goblin', 'assets/Monsters_Creatures_Fantasy/Idle', { frameWidth: 150, frameHeight: 150 });
 
@@ -31,6 +32,9 @@ class Preloader extends Phaser.Scene {
         this.load.audio('omen', 'assets/audio/theme/Omen.mp3')
         this.load.audio('bossMusic', 'assets/audio/theme/Amygdala.mp3')
         this.load.audio('luna', 'assets/audio/theme/TheThing8bit.mp3');
+
+        
+        
     };
 
     create() {
@@ -61,7 +65,9 @@ class Preloader extends Phaser.Scene {
         this.anims.create({ key: 'boss_slide', frames: this.anims.generateFrameNumbers('boss', { start: 24, end: 28 }), duration: 800, });
         this.anims.create({ key: 'boss_hurt', frames: this.anims.generateFrameNumbers('boss', { start: 59, end: 61 }), frameRate: 5, });
         this.anims.create({ key: 'boss_defeat', frames: this.anims.generateFrameNumbers('boss', { start: 62, end: 68 }), frameRate: 8, });
-        
+        this.anims.create({ key: 'pre-thunder', frames: this.anims.generateFrameNumbers('boss', { start: 62, end: 64 }), frameRate: 12, });
+        this.anims.create({ key: 'post-thunder-charge', frames: this.anims.generateFrameNumbers('boss', { start: 59, end: 65 }), frameRate: 12, })
+
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
@@ -82,6 +88,9 @@ class Preloader extends Phaser.Scene {
             repeat: -1
         });
 
-        this.scene.start('Level1');
+        // EFFECT
+        this.anims.create({ key: 'thunder', frames: this.anims.generateFrameNumbers('Thunder', { start: 0, end: 6 }), repeat : 2, frameRate: 10, });
+
+        this.scene.start('MainMenu');
     };
 }
