@@ -33,7 +33,14 @@ class Preloader extends Phaser.Scene {
         this.load.audio('bossMusic', 'assets/audio/theme/Amygdala.mp3')
         this.load.audio('luna', 'assets/audio/theme/TheThing8bit.mp3');
 
-        
+        // SND FX
+        this.load.audio('cry-thunder', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/Explosion8.mp3')
+        this.load.audio('mort', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/mort.mp3')
+        this.load.audio('stab', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/sword-stab.mp3')
+        this.load.audio('jump', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/jump.wav')
+        this.load.audio('woosh', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/sword-woosh.wav')
+        this.load.audio('pan', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/preview.mp3')
+        this.load.audio('slide', 'assets/Monsters_Creatures_Fantasy/boss/sound-fx/slide.wav')
         
     };
 
