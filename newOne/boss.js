@@ -16,11 +16,11 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
 
         
         this.speed_walk = 85;
-        this.speed_slide = 185
+        this.speed_slide = 155
         this.current_slide_speed = 0;
 
-        this.Phase2 = false;
-        this.Phase3 = false;
+        this.Phase2 = true;
+        this.Phase3 = true;
         this.direction;
         this.distance;
         this.player_attack = this.scene.physics.add.staticGroup();
@@ -107,7 +107,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
 
                     case 1:
                         if (!this.anims.isPlaying) {
-                            this.scene.sound.play('snd_sword_slash');
+                            // this.scene.sound.play('snd_sword_slash');
                             this.anims.play('boss_attack_2_2', true);
                             this.flag = 2;
                             var attack_box = this.player_attack.create(this.x + (this.flipX ? -20 : 20), this.y, "", "", false);
@@ -116,7 +116,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
                         break;
 
                     case 2:
-                        if (this.Phase2)
+                        if (this.Phase3)
                             this.combo = 1;
                         if (!this.anims.isPlaying) {
                             if (this.combo)
@@ -135,7 +135,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
             case "Attack3":
                 switch (this.flag) {
                     case 0:
-                        this.anims.play('boss_attack_3_1', true);
+                        // this.anims.play('boss_attack_3_1', true);
                         this.flag = 1;
                         this.setVelocityX((this.flipX ? -1 : 1) * 50);
                         break;

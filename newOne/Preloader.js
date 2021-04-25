@@ -82,6 +82,6 @@ class Preloader extends Phaser.Scene {
             repeat: -1
         });
 
-        this.scene.start('MainMenu');
+        this.scene.start('Level4');
     };
 }
