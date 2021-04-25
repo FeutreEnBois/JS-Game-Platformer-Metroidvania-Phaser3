@@ -25,6 +25,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
         this.direction;
         this.distance;
         this.player_attack = this.scene.physics.add.staticGroup();
+        // this.setCollideWorldBounds(true);
     }
 
     attack_hit(attack, object) {

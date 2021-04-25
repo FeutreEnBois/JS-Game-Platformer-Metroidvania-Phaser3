@@ -98,6 +98,6 @@ class Preloader extends Phaser.Scene {
         // EFFECT
         this.anims.create({ key: 'thunder', frames: this.anims.generateFrameNumbers('Thunder', { start: 0, end: 6 }), repeat : 2, frameRate: 10, });
 
-        this.scene.start('MainMenu');
+        this.scene.start('Level3');
     };
 }

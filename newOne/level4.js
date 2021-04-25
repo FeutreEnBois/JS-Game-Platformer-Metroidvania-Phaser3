@@ -74,7 +74,7 @@ class Level4 extends Phaser.Scene {
         this.physics.add.collider(end, platforms);
 
         // create and config player
-        player = new Player(this, 100, 100);
+        player = new Player(this, 100, 210);
         this.physics.add.collider(player, platforms);
         player.body.setCollideWorldBounds(true);
 
@@ -85,10 +85,10 @@ class Level4 extends Phaser.Scene {
  
         // config boss
         bosses = this.add.group()
-        this.boss = new Boss(this,435,120)
+        this.boss = new Boss(this,435,190)
         bosses.add(this.boss)
         this.physics.add.overlap(this.boss.player_attack, player, (object, attack) => { this.boss.attack_hit(attack, object) }, null, this);
-        this.physics.add.collider(bosses, platforms);
+        this.physics.add.collider(this.boss, platforms);
     }
 
     update() {
