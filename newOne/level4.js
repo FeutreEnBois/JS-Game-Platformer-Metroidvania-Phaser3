@@ -10,12 +10,6 @@ class Level4 extends Phaser.Scene {
 
     create() {
 
-        // config music
-        this.sound.stopAll();
-        this.music = this.sound.add('bossMusic');
-        this.music.setVolume(0.6);
-        this.music.setLoop(true);
-        this.music.play();
         const map = this.make.tilemap({ key: "lvl4" });
 
         // get map
@@ -66,18 +60,15 @@ class Level4 extends Phaser.Scene {
         // P for pause
         if (this.keyP.isDown) {
             this.physics.pause();
-            this.music.pause();
         } 
         // O for resume
         else if (this.keyO.isDown){
             this.physics.resume();
-            this.music.resume();
         }
         // I for restart current scene
         else if (this.keyI.isDown){
             // music.stop();
             this.scene.restart();
-            this.music.stop();
         }
     
         // player moovements

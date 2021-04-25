@@ -71,7 +71,16 @@ class Level3 extends Phaser.Scene {
         
         // go next level
         this.physics.add.collider(this.end, this.platforms);
-        this.physics.add.collider(this.end, this.player, () => this.scene.start("Level4"));
+        this.physics.add.collider(this.end, this.player, () => {
+
+        // config music for LvL 4
+        this.sound.stopAll();
+        this.music = this.sound.add('bossMusic');
+        this.music.setVolume(0.6);
+        this.music.setLoop(true);
+        this.music.play();
+        this.scene.start("Level4")
+        });
 
         // config bullet
         bullets = this.physics.add.group();
