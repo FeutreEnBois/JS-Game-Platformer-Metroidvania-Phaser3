@@ -66,6 +66,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         this.flag = 1;
                         this.slide_cooldown = 1;
                         this.scene.time.addEvent({ delay: 500, callback: () => { this.slide_cooldown = 0; } });
+                        
                         break;
 
                     case 1:
@@ -137,7 +138,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 this.flag = 0;
                 if (this.body.onFloor())
                 {
-                    this.jump = 1;
+                    this.jump = 2;
                     if(this.keySpace.isPressed && !this.slide_cooldown)
                     {
                         this.change_state("Slide");
@@ -147,6 +148,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         this.setVelocityY(-200);
                         this.anims.play('hero_up', true);
                     }
+
                     else if (direction != 0)
                     {
                         this.setVelocityX(direction*75);
@@ -164,7 +166,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 }
                 else
                 {
-                    if(this.keySpace.isPressed && this.jump)
+                    if(this.Z.isPressed && this.jump)
                     {
                         this.jump--;
                         this.change_state("Boost");
@@ -180,6 +182,11 @@ class Player extends Phaser.Physics.Arcade.Sprite
                             this.anims.play('hero_fall', true);
                     else if (this.body.velocity.y < 0 && this.Z.isUp)
                             this.body.velocity.y *= 0.8;
+
+                    if(this.jump && this.keySpace.isPressed) {
+                        this.change_state("Slide");
+                        this.setVelocityY(-200);
+                    }
                 }
                 break;
         }
