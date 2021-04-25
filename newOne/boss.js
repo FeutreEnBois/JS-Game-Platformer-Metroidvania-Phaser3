@@ -29,7 +29,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
 
     attack_hit(attack, object) {
         this.scene.cameras.main.shake(50, 0.02);
-        object.change_state("Death");
+        object.player_get_hit();
 
 
     }
