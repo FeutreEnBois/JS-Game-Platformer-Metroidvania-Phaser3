@@ -4,6 +4,8 @@ Pour ce projet nous avons decide de faire un simple platformer.
 
 # Comment jouer
 
+Nous possedons actuellement 2 niveaux avec une salle de boss
+
 - gauche/droite: <-/-> <br>
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836636909178585108/unknown.png)
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836636655640117279/unknown.png)
