@@ -2,7 +2,7 @@
 
 Pour ce projet nous avons decide de faire un simple platformer.
 
-# comment jouer
+# Comment jouer
 
 - gauche/droite: <-/-> <br>
 - sauter: z (votre personnage possede un tripple saut) <br>
