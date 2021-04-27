@@ -13,6 +13,9 @@ Pour ce projet nous avons decide de faire un simple platformer.
 - glissade: espace (vous etes invulnerable pendant la glissade. Vous pouvez aussi effectuer la glissade en fin de saut. Attention apres une glissade vous ne pourrez plus rien faire avant la fin de l'animation) <br>
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836639076236394589/unknown.png)
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836639255014670366/unknown.png)
+- pause: P (pause seulement la physique du jeu)
+- resume: O
+- restart: I
 <br>
 Malheureusement le boss actuelle ne peut pas encore etre battue mais vous pouvez essayé de survivre le plus longtemps possible ce qui une tache ardu
 
