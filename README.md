@@ -8,7 +8,7 @@ Pour ce projet nous avons decide de faire un simple platformer.
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836636909178585108/unknown.png)
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836636655640117279/unknown.png)
 - sauter: z (votre personnage possede un tripple saut) <br>
-![image](https://cdn.discordapp.com/attachments/827561811464159242/836637508485382184/unknown.png)
+![image](https://cdn.discordapp.com/attachments/827561811464159242/836638289016389722/unknown.png)
 ![image](https://cdn.discordapp.com/attachments/827561811464159242/836637960483897374/unknown.png)
 - glissade: espace (vous etes invulnerable pendant la glissade. Vous pouvez aussi effectuer la glissade en fin de saut. Attention apres une glissade vous ne pourrez plus rien faire avant la fin de l'animation) <br>
 
