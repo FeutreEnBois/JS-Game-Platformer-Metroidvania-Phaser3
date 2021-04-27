@@ -1,5 +1,13 @@
 # JS_Project
 
+Pour ce projet nous avons decide de faire un simple platformer.
+
+# comment jouer
+
+gauche/droite: <-/-> <br>
+sauter: z (votre personnage possede un tripple saut) <br>
+glissade: espace (vous etes invulnerable pendant la glissade. Vous pouvez aussi effectuer la glissade en fin de saut. Attention apres une glisade vous ne pourrez plus rien faire avant la fin de l'animation) <br>
+
 Le fichier Phaser : [Phaser.min](https://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.7/phaser.min.js) <br>
 si le lien ne fonctinne pas vous pouvez copiez coller le lien suivant : https://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.7/phaser.min.js
 
