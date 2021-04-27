@@ -1,15 +1,4 @@
 # JS_Project
-Simple jeu en javascript
-
-# Lien de Développement
-
-####Mettre un lien
-
-Rendez-vous sur mon super git !
-
-Il vous faut le mot sur lequel vous souhaitez faire votre lien entre crochets [ ], puis votre lien entre parenthèses ( ).
-
-Rendez-vous sur [mon super git](https://github.com/FeutreEnBois) ! <br>
 
 Le fichier Phaser : [Phaser.min](https://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.7/phaser.min.js) <br>
 si le lien ne fonctinne pas vous pouvez copiez coller le lien suivant : https://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.7/phaser.min.js
