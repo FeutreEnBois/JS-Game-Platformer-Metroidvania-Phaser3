@@ -22,7 +22,7 @@ Nous possedons actuellement 2 niveaux avec une salle de boss
 - resume: O
 - restart: I
 <br>
-Malheureusement le boss actuelle ne peut pas encore etre battue mais vous pouvez essayé de survivre le plus longtemps possible ce qui une tache ardu
+Malheureusement le boss actuelle ne peut pas encore etre battue mais vous pouvez essayé de survivre le plus longtemps possible ce qui est une tache ardu
 
 # Phaser 3
 Le fichier Phaser : [Phaser.min](https://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.7/phaser.min.js) <br>
